@@ -239,7 +239,6 @@ public class PayrollService {
         } 
     }
     
-    //Archiving Employee
     private void archiveEmployee(){
         System.out.println("=== ARCHIVING EMPLOYEE ===");
         
@@ -295,23 +294,5 @@ public class PayrollService {
         System.out.println("\n==== ARCHIVED EMPLOYEES ====");
         
         List<Employee> archivedEmployees = employeeDAO.getArchivedEmployees();
-        
-        if (archivedEmployees.isEmpty()){
-            System.out.println("No Employee Archived!");
-            return;
-        }
-        
-        System.out.println("\nID || NAME || POSITION || RATE PER DAY || STATUS");
-        System.out.println("------------------------------------------------");
-        
-        //Iterates through the list of employees
-        for (Employee emp : archivedEmployees){
-            System.out.printf("\n%d | %s | %s | P%.2f | %s\n",
-                    emp.getEmpId(),
-                    emp.getEmpName(),
-                    emp.getEmpPosition(),
-                    emp.getRatePerDay(),
-                    emp.getEmpStatus());
-        }
     }
 }
