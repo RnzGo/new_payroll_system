@@ -59,7 +59,14 @@ public class MainFrame extends javax.swing.JFrame {
         pnlHeader.setPreferredSize(new java.awt.Dimension(1440, 153));
         pnlHeader.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblBrgyIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/payroll_system/554311662_1317130376082826_1071741920614451639_n 1.png"))); // NOI18N
+        java.net.URL brgyIconUrl = getClass().getResource("/payroll_system/554311662_1317130376082826_1071741920614451639_n 1.png");
+        if (brgyIconUrl != null) {
+            lblBrgyIcon.setIcon(new javax.swing.ImageIcon(brgyIconUrl)); // NOI18N
+        } else {
+            // Resource missing at runtime; leave label empty and log to stderr so user can add the image to resources
+            lblBrgyIcon.setText("");
+            System.err.println("Warning: resource '/payroll_system/554311662_1317130376082826_1071741920614451639_n 1.png' not found on classpath.");
+        }
         pnlHeader.add(lblBrgyIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 130, 150));
 
         lblHeaderTitle.setFont(new java.awt.Font("Tahoma", 1, 42)); // NOI18N
