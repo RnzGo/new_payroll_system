@@ -28,9 +28,7 @@ public class PayrollService {
                 case 3 -> updateEmployee();
                 case 4 -> archiveEmployee();
                 case 5 -> viewArchivedEmployees();
-                case 6 -> recordAttendance();
-                case 7 -> viewEmployeeAttendance();
-                case 8 -> {
+                case 6 -> {
                     System.out.println("Exiting Program...");
                     return;
                 }
@@ -48,9 +46,7 @@ public class PayrollService {
         System.out.println("3.) Update an Employee's Informtaion");
         System.out.println("4.) Archive an Employee");
         System.out.println("5.) View Archive Employees");
-        System.out.println("6.) Record Attendance");
-        System.out.println("7.) View Employee Attendance");
-        System.out.println("8.) Exit");
+        System.out.println("6.) Exit");
         
     }
     
@@ -308,7 +304,7 @@ public class PayrollService {
         if(archivedEmployees.isEmpty()){
             System.out.println("NO ARCHIVED EMPLOYEES FOUND! ");
             return;
-        }
+    }
         
         System.out.println("\n ARCHIVED EMPLOYEES ");
         System.out.println("\nID \t NAME \t\t\t POSITION \t RATE PER DAY \t\t STATUS");
@@ -320,7 +316,7 @@ public class PayrollService {
             emp.getEmpPosition(),
             emp.getRatePerDay(),
             emp.getEmpStatus());
-        }
+}
     }
     
     //================================== ATTENDANCE =========================================
