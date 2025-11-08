@@ -3,8 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/Payroll_System.java</file>
-            <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/DatabaseConnection/java.java</file>
+            <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/util/DatabaseConnection.java</file>
+            <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/model/Deductions.java</file>
+            <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/dao/AttendanceDAO.java</file>
+            <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/dao/EmployeeDAO.java</file>
+            <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/model/Attendance.java</file>
+            <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/service/PayrollService.java</file>
         </group>
     </open-files>
 </project-private>

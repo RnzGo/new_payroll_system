@@ -1,9 +1,12 @@
 package payroll_system.service;
 
+import payroll_system.model.Attendance;
+import payroll_system.dao.AttendanceDAO;
 import payroll_system.dao.EmployeeDAO;
 import payroll_system.model.Employee;
 import java.util.List;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class PayrollService {
     
@@ -25,7 +28,9 @@ public class PayrollService {
                 case 3 -> updateEmployee();
                 case 4 -> archiveEmployee();
                 case 5 -> viewArchivedEmployees();
-                case 6 -> {
+                case 6 -> recordAttendance();
+                case 7 -> viewEmployeeAttendance();
+                case 8 -> {
                     System.out.println("Exiting Program...");
                     return;
                 }
@@ -43,10 +48,13 @@ public class PayrollService {
         System.out.println("3.) Update an Employee's Informtaion");
         System.out.println("4.) Archive an Employee");
         System.out.println("5.) View Archive Employees");
-        System.out.println("6.) Exit");
+        System.out.println("6.) Record Attendance");
+        System.out.println("7.) View Employee Attendance");
+        System.out.println("8.) Exit");
         
     }
     
+// ================================== EMPLOYEE MANAGEMENT =================================
     //METHOD FOR ADD EMPLOYEE
     private void addEmployee(){
         System.out.println("\n ----Add New Employee---- ");
@@ -239,11 +247,12 @@ public class PayrollService {
         } 
     }
     
+    //================================== ARCHIVE EMPLOYEES ================================
     private void archiveEmployee(){
         System.out.println("=== ARCHIVING EMPLOYEE ===");
         
         //SHOW LIST OF ACTIVE EMPLOYEES
-        List<Employee> activeEmployee = employeeDAO.getActiveEmployee();
+        List<Employee> activeEmployee = employeeDAO.getActiveEmployees();
         
         if(activeEmployee.isEmpty()){
             System.out.println("No Active Employee Found!");
@@ -290,9 +299,132 @@ public class PayrollService {
         }
     }
     
+    //VIEW ARCHIVED EMPLOYEES
     private void viewArchivedEmployees(){
         System.out.println("\n==== ARCHIVED EMPLOYEES ====");
         
         List<Employee> archivedEmployees = employeeDAO.getArchivedEmployees();
+        
+        if(archivedEmployees.isEmpty()){
+            System.out.println("NO ARCHIVED EMPLOYEES FOUND! ");
+            return;
+        }
+        
+        System.out.println("\n ARCHIVED EMPLOYEES ");
+        System.out.println("\nID \t NAME \t\t\t POSITION \t RATE PER DAY \t\t STATUS");
+        
+        for (Employee emp : archivedEmployees){
+            System.out.printf("\n %d \t %-15s \t %-10s \t P %,-10.2f \t %-8s%n",
+            emp.getEmpId(),
+            emp.getEmpName(),
+            emp.getEmpPosition(),
+            emp.getRatePerDay(),
+            emp.getEmpStatus());
+        }
+    }
+    
+    //================================== ATTENDANCE =========================================
+    private void recordAttendance(){
+        System.out.println("\n ==== RECORD ATTENDANCE ==== ");
+        
+        //SHOW ACTIVE EMPLOYEES
+        List<Employee> activeEmployees = employeeDAO.getActiveEmployees();
+        
+        if(activeEmployees.isEmpty()){
+            System.out.println("No Active Employee Found!");
+            return;
+        }
+        
+        System.out.println("\n === ACTIVE EMPLOYEES ===");
+        System.out.println(" ID \t ||  NAME \t ||  POSITION");
+        
+        for (Employee emp : activeEmployees){
+            System.out.printf("\n%d \t %-15s \t %-10s%n",
+            emp.getEmpId(),
+            emp.getEmpName(),
+            emp.getEmpPosition());
+        }
+        //EMPLOYEE ID FOR RECORD
+        System.out.print("ENTER EMPLOYEE ID: ");
+        int empId = scanner.nextInt();
+        scanner.nextLine();
+        
+        //VERIFY IF EMPLOYEE EXIST
+        Employee employee = employeeDAO.getEmployeeById(empId);
+        if (employee == null || "Inactive".equals(employee.getEmpStatus())){
+            System.out.println("Employee Not Found Or Inactive!");
+            return;
+        }
+        
+        //RECORD THE ATTENDANCE BY PERIOD
+        System.out.print("ENTER DAYS WORKED: ");
+        int daysWorked = scanner.nextInt();
+        scanner.nextLine();
+        
+        System.out.print("ENTER PERIOD START (YYYY-MM-DD): ");
+        String startStr = scanner.nextLine();
+        LocalDate periodStart = LocalDate.parse(startStr);
+        
+        
+        System.out.print("ENTER PERIOD END (YYYY-MM-DD): ");
+        String endStr = scanner.nextLine();
+        LocalDate periodEnd = LocalDate.parse(endStr);
+        
+        //CREATE ATTENDANCE RECORD
+        Attendance attendance = new Attendance(empId,daysWorked,periodStart,periodEnd);
+        
+        //CONFIRMATION OF RECORD
+        System.out.println("\n ARE YOU SURE TO RECORD THIS ATTENDANCE OF  " + employee.getEmpName() + " || " + employee.getEmpPosition());
+        System.out.println("\nSTARTING PERIOD: " + attendance.getPeriodStart());
+        System.out.println("ENDING PERIOD: " + attendance.getPeriodEnd());
+        System.out.println("DAYS WORKED: " + attendance.getDaysWorked());
+        
+        System.out.print("CONFIRM RECORDING? (y/n): ");
+        String confirm = scanner.nextLine();
+        
+        //CONFIRMATION 
+        if(confirm.equalsIgnoreCase("y")){
+            AttendanceDAO attendanceDAO = new AttendanceDAO();
+            boolean success = attendanceDAO.addAttendance(attendance);
+            
+            if (success){
+                System.out.println("\n Employee's Attendance Recorded Successfully");
+            }else{
+                System.out.println("\n Failed To Record Employee's Attendance!");
+            }
+        } else {
+            System.out.println("\n RECORDING CANCELLED!");
+        }
+    }
+    //VIEW EMPLOYEE ATTENDANCE
+    private void viewEmployeeAttendance(){
+            System.out.println("\n ==== VIEW EMPLOYEE ATTENDANCE ==== ");
+            
+            System.out.print("ENTER EMPLOYEE ID: ");
+            int empId = scanner.nextInt();
+            scanner.nextLine();
+            
+            //VERIFY IF EMPLOYEE EXISTS
+            Employee employee = employeeDAO.getEmployeeById(empId);
+            if (employee == null){
+                System.out.println("NO EMPLOYEE FOUND!");
+                return;
+            }
+            // IF EMPLOYEE EXIST
+            System.out.println("\n EMPLOYEE NAME: " + employee.getEmpName() + "\t POSITION: " + employee.getEmpPosition());
+            
+            List <Attendance> attendanceRecord = new AttendanceDAO().getAllAttendanceOfEmployeeById(empId);
+            
+            if (attendanceRecord.isEmpty()){
+                System.out.println("\n No Record Exist!");
+                return;
+            }
+            
+            System.out.println("\n ATTENDANCE RECORD OF " + employee.getEmpName() + " || " + employee.getEmpPosition());
+            
+            for (Attendance att : attendanceRecord){
+                System.out.println("\n[ PERIOD: " + att.getPeriodStart() + " to " + att.getPeriodEnd());
+                System.out.println("DAYS WORKED: " + att.getDaysWorked() + " ]");
+        }
     }
 }
