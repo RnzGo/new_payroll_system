@@ -46,7 +46,6 @@ public class PayslipPopup extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1043, 971));
         setSize(new java.awt.Dimension(1043, 971));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

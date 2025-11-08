@@ -15,8 +15,9 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
-        this.setExtendedState(MainFrame.MAXIMIZED_BOTH);
-        this.setResizable(true);
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**
@@ -29,8 +30,8 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlHeader = new javax.swing.JPanel();
-        lblBrgyIcon = new javax.swing.JLabel();
         lblHeaderTitle = new javax.swing.JLabel();
+        lblBrgyIcon1 = new javax.swing.JLabel();
         pnllSideBar = new javax.swing.JPanel();
         lblSystem = new javax.swing.JLabel();
         btnPayrollTab = new javax.swing.JButton();
@@ -43,6 +44,39 @@ public class MainFrame extends javax.swing.JFrame {
         btnPayslipTab = new javax.swing.JButton();
         lblPayroll = new javax.swing.JLabel();
         lblManagement = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        lblBrgyIcon = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jTextField4 = new javax.swing.JTextField();
+        jTextField5 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jTextField7 = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jTextField6 = new javax.swing.JTextField();
+        jTextField8 = new javax.swing.JTextField();
+        jTextField9 = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -52,6 +86,7 @@ public class MainFrame extends javax.swing.JFrame {
         setBackground(new java.awt.Color(209, 209, 209));
         setForeground(new java.awt.Color(209, 209, 209));
         setMinimumSize(new java.awt.Dimension(1024, 768));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlHeader.setBackground(new java.awt.Color(255, 251, 251));
         pnlHeader.setForeground(new java.awt.Color(255, 251, 251));
@@ -59,22 +94,14 @@ public class MainFrame extends javax.swing.JFrame {
         pnlHeader.setPreferredSize(new java.awt.Dimension(1440, 153));
         pnlHeader.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        java.net.URL brgyIconUrl = getClass().getResource("/payroll_system/554311662_1317130376082826_1071741920614451639_n 1.png");
-        if (brgyIconUrl != null) {
-            lblBrgyIcon.setIcon(new javax.swing.ImageIcon(brgyIconUrl)); // NOI18N
-        } else {
-            // Resource missing at runtime; leave label empty and log to stderr so user can add the image to resources
-            lblBrgyIcon.setText("");
-            System.err.println("Warning: resource '/payroll_system/554311662_1317130376082826_1071741920614451639_n 1.png' not found on classpath.");
-        }
-        pnlHeader.add(lblBrgyIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 130, 150));
-
-        lblHeaderTitle.setFont(new java.awt.Font("Tahoma", 1, 42)); // NOI18N
-        lblHeaderTitle.setForeground(new java.awt.Color(0, 0, 0));
+        lblHeaderTitle.setFont(new java.awt.Font("Tahoma", 1, 40)); // NOI18N
         lblHeaderTitle.setText("BARANGAY SAN ROQUE, CAINTA, RIZAL");
-        pnlHeader.add(lblHeaderTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 890, 150));
+        pnlHeader.add(lblHeaderTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 860, 150));
 
-        getContentPane().add(pnlHeader, java.awt.BorderLayout.PAGE_START);
+        lblBrgyIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/payroll_system/assets/placeholder.png"))); // NOI18N
+        pnlHeader.add(lblBrgyIcon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 130, 130));
+
+        getContentPane().add(pnlHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1024, -1));
 
         pnllSideBar.setBackground(new java.awt.Color(11, 11, 69));
         pnllSideBar.setPreferredSize(new java.awt.Dimension(290, 871));
@@ -82,12 +109,15 @@ public class MainFrame extends javax.swing.JFrame {
         pnllSideBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblSystem.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
+        lblSystem.setForeground(new java.awt.Color(255, 255, 255));
         lblSystem.setText("System");
         pnllSideBar.add(lblSystem, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 250, 40));
 
         btnPayrollTab.setBackground(new java.awt.Color(11, 11, 69));
         btnPayrollTab.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnPayrollTab.setForeground(new java.awt.Color(255, 255, 255));
         btnPayrollTab.setText("Payroll");
+        btnPayrollTab.setBorder(null);
         btnPayrollTab.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPayrollTabActionPerformed(evt);
@@ -103,6 +133,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnAddEmployee.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnAddEmployee.setForeground(new java.awt.Color(255, 255, 255));
         btnAddEmployee.setText("Add Employee");
+        btnAddEmployee.setBorder(null);
         btnAddEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddEmployeeActionPerformed(evt);
@@ -114,12 +145,19 @@ public class MainFrame extends javax.swing.JFrame {
         btnDelEmployee.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnDelEmployee.setForeground(new java.awt.Color(255, 255, 255));
         btnDelEmployee.setText("Delete Employee");
+        btnDelEmployee.setBorder(null);
+        btnDelEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelEmployeeActionPerformed(evt);
+            }
+        });
         pnlEmployeeSubmenu.add(btnDelEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 250, 30));
 
         btnViewEmployee.setBackground(new java.awt.Color(14, 14, 86));
         btnViewEmployee.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnViewEmployee.setForeground(new java.awt.Color(255, 255, 255));
         btnViewEmployee.setText("View Employee");
+        btnViewEmployee.setBorder(null);
         btnViewEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnViewEmployeeActionPerformed(evt);
@@ -131,7 +169,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         btnEmployeeManagement1.setBackground(new java.awt.Color(11, 11, 69));
         btnEmployeeManagement1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnEmployeeManagement1.setForeground(new java.awt.Color(255, 255, 255));
         btnEmployeeManagement1.setText("Employee Management     ▼");
+        btnEmployeeManagement1.setBorder(null);
         btnEmployeeManagement1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEmployeeManagement1ActionPerformed(evt);
@@ -141,7 +181,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         btnSalaryCompTab1.setBackground(new java.awt.Color(11, 11, 69));
         btnSalaryCompTab1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnSalaryCompTab1.setForeground(new java.awt.Color(255, 255, 255));
         btnSalaryCompTab1.setText("Salary Computation");
+        btnSalaryCompTab1.setBorder(null);
         btnSalaryCompTab1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalaryCompTab1ActionPerformed(evt);
@@ -151,7 +193,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         btnPayslipTab.setBackground(new java.awt.Color(11, 11, 69));
         btnPayslipTab.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnPayslipTab.setForeground(new java.awt.Color(255, 255, 255));
         btnPayslipTab.setText("Payslip");
+        btnPayslipTab.setBorder(null);
         btnPayslipTab.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPayslipTabActionPerformed(evt);
@@ -160,14 +204,260 @@ public class MainFrame extends javax.swing.JFrame {
         pnllSideBar.add(btnPayslipTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 290, -1));
 
         lblPayroll.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
+        lblPayroll.setForeground(new java.awt.Color(255, 255, 255));
         lblPayroll.setText("Payroll");
         pnllSideBar.add(lblPayroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 250, 40));
 
         lblManagement.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
+        lblManagement.setForeground(new java.awt.Color(255, 255, 255));
         lblManagement.setText("Management");
         pnllSideBar.add(lblManagement, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 250, 40));
 
-        getContentPane().add(pnllSideBar, java.awt.BorderLayout.LINE_START);
+        getContentPane().add(pnllSideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 153, -1, 530));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 23)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel1.setText("BARANGAY EMPLOYEE SALARY COMPUTATION");
+
+        lblBrgyIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/payroll_system/assets/placeholder.png"))); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jLabel5.setText("Computation of Salary");
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel6.setText("Employee ID:");
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel7.setText("Employee Name:");
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel8.setText("Employee Position:");
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel9.setText("Rate Per Day:");
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel10.setText("Gross Salary:");
+
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
+
+        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField5ActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel11.setText("<html>Number of Days<br>Worked:</html>");
+
+        jButton1.setBackground(new java.awt.Color(11, 11, 69));
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Compute");
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel12.setText("Tax (3% of Gross Salary):");
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jLabel13.setText("Computation of Salary");
+
+        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField7ActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel14.setText("PAG-IBIG:");
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel15.setText("SSS:");
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel16.setText("Loan:");
+
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
+
+        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField8ActionPerformed(evt);
+            }
+        });
+
+        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField9ActionPerformed(evt);
+            }
+        });
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel17.setText("Total Detuctions:");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblBrgyIcon)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(26, 26, 26)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel16)))
+                            .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(22, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(301, 301, 301))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(93, 93, 93)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel13)
+                .addGap(74, 74, 74))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(lblBrgyIcon))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(jLabel1)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15)
+                            .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16)
+                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(7, 7, 7)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(9, 9, 9)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel17))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55))
+        );
+
+        jTextField1.getAccessibleContext().setAccessibleName("employeeID");
+        jTextField2.getAccessibleContext().setAccessibleName("employeeName");
+        jButton1.getAccessibleContext().setAccessibleName("compute");
+
+        jTabbedPane1.addTab("SalaryComputation", jPanel2);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 34)); // NOI18N
+        jLabel2.setText("Employee Registration");
+        jPanel3.add(jLabel2);
+
+        jTabbedPane1.addTab("AddEmployee", jPanel3);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 34)); // NOI18N
+        jLabel3.setText("Archive Employee");
+        jPanel4.add(jLabel3);
+
+        jTabbedPane1.addTab("ArchiveEmployee", jPanel4);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 34)); // NOI18N
+        jLabel4.setText("View Employee");
+        jPanel5.add(jLabel4);
+
+        jTabbedPane1.addTab("ViewEmployee", jPanel5);
+
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 735, 570));
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -177,16 +467,23 @@ public class MainFrame extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        setSize(new java.awt.Dimension(1038, 636));
+        setSize(new java.awt.Dimension(1038, 711));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPayrollTabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayrollTabActionPerformed
         // TODO add your handling code here:
+        // Open the Payroll popup window
+        java.awt.EventQueue.invokeLater(() -> {
+            PayrollPopup popup = new PayrollPopup();
+            popup.setLocationRelativeTo(this);
+            popup.setVisible(true);
+        });
     }//GEN-LAST:event_btnPayrollTabActionPerformed
 
     private void btnAddEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEmployeeActionPerformed
         // TODO add your handling code here:
+    jTabbedPane1.setSelectedIndex(1);
     }//GEN-LAST:event_btnAddEmployeeActionPerformed
 
     private void btnEmployeeManagement1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmployeeManagement1ActionPerformed
@@ -195,15 +492,65 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void btnSalaryCompTab1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalaryCompTab1ActionPerformed
         // TODO add your handling code here:
+        
+    jTabbedPane1.setSelectedIndex(0);
     }//GEN-LAST:event_btnSalaryCompTab1ActionPerformed
 
     private void btnPayslipTabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayslipTabActionPerformed
         // TODO add your handling code here:
+        // Open the Payslip popup window
+        java.awt.EventQueue.invokeLater(() -> {
+            PayslipPopup popup = new PayslipPopup();
+            popup.setLocationRelativeTo(this);
+            popup.setVisible(true);
+        });
     }//GEN-LAST:event_btnPayslipTabActionPerformed
 
     private void btnViewEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewEmployeeActionPerformed
         // TODO add your handling code here:
+    jTabbedPane1.setSelectedIndex(3);
     }//GEN-LAST:event_btnViewEmployeeActionPerformed
+
+    private void btnDelEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelEmployeeActionPerformed
+        // TODO add your handling code here:
+    jTabbedPane1.setSelectedIndex(2);
+    }//GEN-LAST:event_btnDelEmployeeActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField5ActionPerformed
+
+    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField7ActionPerformed
+
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField6ActionPerformed
+
+    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField8ActionPerformed
+
+    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField9ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,10 +596,43 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnPayslipTab;
     private javax.swing.JButton btnSalaryCompTab1;
     private javax.swing.JButton btnViewEmployee;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextField9;
     private javax.swing.JLabel lblBrgyIcon;
+    private javax.swing.JLabel lblBrgyIcon1;
     private javax.swing.JLabel lblHeaderTitle;
     private javax.swing.JLabel lblManagement;
     private javax.swing.JLabel lblPayroll;
