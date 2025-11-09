@@ -41,4 +41,12 @@ public class Deductions {
         this.deductionRate = deductionRate;
     }
     
+    @Override
+    public String toString(){
+    
+        return "Deduction: [ " +
+                "deductionId = " + deductionId + 
+                "deductionName = " + deductionName + 
+                "deductionRate = " + deductionRate + " ]";
+    }
 }

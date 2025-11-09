@@ -6,14 +6,14 @@ import java.time.LocalDate;
 public class Attendance {
     private int daysWorkedId;
     private int empId;
-    private int daysWorked;
+    private double daysWorked;
     private LocalDate periodStart;
     private LocalDate periodEnd;
     
     //Empty Constructor for Database Operation
     public Attendance(){}
     
-    public Attendance(int empId, int daysWorked, LocalDate periodStart, LocalDate periodEnd){
+    public Attendance(int empId, double daysWorked, LocalDate periodStart, LocalDate periodEnd){
         this.empId = empId;
         this.daysWorked = daysWorked;
         this.periodStart = periodStart;
@@ -37,11 +37,11 @@ public class Attendance {
         this.empId = empId;
     }
 
-    public int getDaysWorked() {
+    public double getDaysWorked() {
         return daysWorked;
     }
 
-    public void setDaysWorked(int daysWorked) {
+    public void setDaysWorked(double daysWorked) {
         this.daysWorked = daysWorked;
     }
 

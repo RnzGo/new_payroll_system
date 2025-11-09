@@ -76,5 +76,5 @@ public class Employee {
 
     public void setEmpStatus(String empStatus) {
         this.empStatus = empStatus;
-    }
+    } 
 }

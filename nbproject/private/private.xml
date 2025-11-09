@@ -5,10 +5,23 @@
         <group>
             <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/util/DatabaseConnection.java</file>
             <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/model/Deductions.java</file>
-            <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/dao/AttendanceDAO.java</file>
             <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/dao/EmployeeDAO.java</file>
-            <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/model/Attendance.java</file>
             <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/service/PayrollService.java</file>
+            <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/model/Employee.java</file>
+            <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/dao/AttendanceDAO.java</file>
+            <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/model/Payroll.java</file>
+            <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/model/Attendance.java</file>
+            <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/dao/PayrollDAO.java</file>
+            <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/dao/PayrollPeriodDAO.java</file>
+            <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/service/PayslipService.java</file>
+            <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/dao/DeductionsDAO.java</file>
+            <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/model/PayslipData.java</file>
+            <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/model/EmployeeDeduction.java</file>
+            <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/dao/EmployeeDeductionDAO.java</file>
+            <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/service/PayrollComputationService.java</file>
+            <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/model/SalaryComputation.java</file>
+            <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/service/SalaryComputationPrinter.java</file>
+            <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/PayrollSystem.java</file>
         </group>
     </open-files>
 </project-private>
