@@ -31,7 +31,10 @@ public class PayslipPopup extends javax.swing.JFrame {
         headerPanel = new javax.swing.JPanel();
         logoPlacer = new javax.swing.JLabel();
         payslip = new javax.swing.JLabel();
-        payPeriod = new javax.swing.JLabel();
+        titlePayPeriod = new javax.swing.JLabel();
+        firstDate = new javax.swing.JLabel();
+        secondDate = new javax.swing.JLabel();
+        dash = new javax.swing.JLabel();
         employeeInfo = new javax.swing.JPanel();
         titleID = new javax.swing.JLabel();
         titleName = new javax.swing.JLabel();
@@ -59,8 +62,17 @@ public class PayslipPopup extends javax.swing.JFrame {
         payslip.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
         payslip.setText("Payslip");
 
-        payPeriod.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        payPeriod.setText("PAY PERIOD: [MM,DD,YY] - [MM,DD,YY]");
+        titlePayPeriod.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        titlePayPeriod.setText("PAY PERIOD:");
+
+        firstDate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        firstDate.setText("[MM,DD,YY]");
+
+        secondDate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        secondDate.setText("[MM,DD,YY]");
+
+        dash.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        dash.setText("-");
 
         javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
         headerPanel.setLayout(headerPanelLayout);
@@ -75,8 +87,14 @@ public class PayslipPopup extends javax.swing.JFrame {
                         .addComponent(payslip))
                     .addGroup(headerPanelLayout.createSequentialGroup()
                         .addGap(214, 214, 214)
-                        .addComponent(payPeriod)))
-                .addContainerGap(228, Short.MAX_VALUE))
+                        .addComponent(titlePayPeriod)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(firstDate)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dash)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(secondDate)))
+                .addGap(51, 223, Short.MAX_VALUE))
         );
         headerPanelLayout.setVerticalGroup(
             headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,7 +104,11 @@ public class PayslipPopup extends javax.swing.JFrame {
                     .addComponent(payslip)
                     .addComponent(logoPlacer))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(payPeriod)
+                .addGroup(headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(titlePayPeriod)
+                    .addComponent(firstDate)
+                    .addComponent(dash)
+                    .addComponent(secondDate))
                 .addContainerGap())
         );
 
@@ -275,22 +297,25 @@ public class PayslipPopup extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
     private javax.swing.JPanel Forms;
+    private javax.swing.JLabel dash;
     private javax.swing.JLabel displayDate;
     private javax.swing.JLabel displayName;
     private javax.swing.JLabel displayPosition;
     private javax.swing.JTextField employeeID;
     private javax.swing.JPanel employeeInfo;
+    private javax.swing.JLabel firstDate;
     private javax.swing.JPanel headerPanel;
     private javax.swing.JLabel logoPlacer;
     private javax.swing.JTable mainForm;
     private javax.swing.JScrollPane mainFormScrollPane;
     private javax.swing.JTable netPay;
     private javax.swing.JScrollPane netPayScrollPane;
-    private javax.swing.JLabel payPeriod;
     private javax.swing.JLabel payslip;
+    private javax.swing.JLabel secondDate;
     private javax.swing.JLabel titleDate;
     private javax.swing.JLabel titleID;
     private javax.swing.JLabel titleName;
+    private javax.swing.JLabel titlePayPeriod;
     private javax.swing.JLabel titlePosition;
     // End of variables declaration//GEN-END:variables
 }
