@@ -51,7 +51,7 @@ public class PayslipPopup extends javax.swing.JFrame {
         mainForm = new javax.swing.JTable();
         Back = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(700, 650));
         setPreferredSize(new java.awt.Dimension(700, 650));
         setSize(new java.awt.Dimension(700, 650));
@@ -262,7 +262,7 @@ public class PayslipPopup extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
-        // TODO add your handling code here:
+        this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_BackActionPerformed
 
     private void employeeIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeIDActionPerformed
