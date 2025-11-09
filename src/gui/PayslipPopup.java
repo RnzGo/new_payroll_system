@@ -28,125 +28,147 @@ public class PayslipPopup extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPanel3 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        headerPanel = new javax.swing.JPanel();
+        logoPlacer = new javax.swing.JLabel();
+        payslip = new javax.swing.JLabel();
+        payPeriod = new javax.swing.JLabel();
+        employeeInfo = new javax.swing.JPanel();
+        titleID = new javax.swing.JLabel();
+        titleName = new javax.swing.JLabel();
+        titlePosition = new javax.swing.JLabel();
+        titleDate = new javax.swing.JLabel();
+        employeeID = new javax.swing.JTextField();
+        displayName = new javax.swing.JLabel();
+        displayPosition = new javax.swing.JLabel();
+        displayDate = new javax.swing.JLabel();
+        Forms = new javax.swing.JPanel();
+        netPayScrollPane = new javax.swing.JScrollPane();
+        netPay = new javax.swing.JTable();
+        mainFormScrollPane = new javax.swing.JScrollPane();
+        mainForm = new javax.swing.JTable();
+        Back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setSize(new java.awt.Dimension(1043, 971));
+        setMinimumSize(new java.awt.Dimension(700, 650));
+        setPreferredSize(new java.awt.Dimension(700, 650));
+        setSize(new java.awt.Dimension(700, 650));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("System Logo");
+        logoPlacer.setText("System Logo");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 45)); // NOI18N
-        jLabel2.setText("Payslip");
+        payslip.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
+        payslip.setText("Payslip");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        jLabel3.setText("PAY PERIOD: [MM,DD,YY] - [MM,DD,YY]");
+        payPeriod.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        payPeriod.setText("PAY PERIOD: [MM,DD,YY] - [MM,DD,YY]");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(jLabel1)
-                .addGap(339, 339, 339)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(352, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(326, 326, 326))
+        javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
+        headerPanel.setLayout(headerPanelLayout);
+        headerPanelLayout.setHorizontalGroup(
+            headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(headerPanelLayout.createSequentialGroup()
+                .addGroup(headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(headerPanelLayout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(logoPlacer)
+                        .addGap(169, 169, 169)
+                        .addComponent(payslip))
+                    .addGroup(headerPanelLayout.createSequentialGroup()
+                        .addGap(214, 214, 214)
+                        .addComponent(payPeriod)))
+                .addContainerGap(228, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addContainerGap(14, Short.MAX_VALUE))
+        headerPanelLayout.setVerticalGroup(
+            headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPanelLayout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addGroup(headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(payslip)
+                    .addComponent(logoPlacer))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(payPeriod)
+                .addContainerGap())
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 130));
+        getContentPane().add(headerPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 90));
+        headerPanel.getAccessibleContext().setAccessibleName("");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabel4.setText("Employee ID: ");
+        titleID.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        titleID.setText("Employee ID: ");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabel5.setText("Employee Name: [Employee Name]");
+        titleName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        titleName.setText("Employee Name:");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabel6.setText("Employee Position: [Employee Position]");
+        titlePosition.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        titlePosition.setText("Employee Position:");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabel7.setText("Date Issued: [MM/DD/YY] ");
+        titleDate.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        titleDate.setText("Date Issued:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        employeeID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                employeeIDActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(93, 93, 93)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
+        displayName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        displayName.setText("[Employee Name]");
+
+        displayPosition.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        displayPosition.setText("[Employee Position]");
+
+        displayDate.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        displayDate.setText("[MM/DD/YY]");
+
+        javax.swing.GroupLayout employeeInfoLayout = new javax.swing.GroupLayout(employeeInfo);
+        employeeInfo.setLayout(employeeInfoLayout);
+        employeeInfoLayout.setHorizontalGroup(
+            employeeInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(employeeInfoLayout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addGroup(employeeInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(employeeInfoLayout.createSequentialGroup()
+                        .addComponent(titlePosition)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
-                        .addComponent(jLabel7)
-                        .addGap(81, 81, 81))))
+                        .addComponent(displayPosition))
+                    .addGroup(employeeInfoLayout.createSequentialGroup()
+                        .addComponent(titleID)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(employeeID, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(109, 109, 109)
+                        .addComponent(titleDate)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(displayDate))
+                    .addGroup(employeeInfoLayout.createSequentialGroup()
+                        .addComponent(titleName)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(displayName)))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+        employeeInfoLayout.setVerticalGroup(
+            employeeInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(employeeInfoLayout.createSequentialGroup()
+                .addContainerGap(13, Short.MAX_VALUE)
+                .addGroup(employeeInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(titleID)
+                    .addComponent(employeeID, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(titleDate)
+                    .addComponent(displayDate))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel5)
+                .addGroup(employeeInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(titleName)
+                    .addComponent(displayName))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel6)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addGroup(employeeInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(titlePosition)
+                    .addComponent(displayPosition))
+                .addGap(14, 14, 14))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 1040, 160));
+        getContentPane().add(employeeInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 700, 120));
 
-        jTable2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        netPay.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        netPay.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Net Pay", null}
             },
@@ -154,17 +176,17 @@ public class PayslipPopup extends javax.swing.JFrame {
                 "Net Pay", "Amount"
             }
         ));
-        jTable2.setRowHeight(45);
-        jTable2.setShowGrid(true);
-        jScrollPane2.setViewportView(jTable2);
+        netPay.setRowHeight(34);
+        netPay.setShowGrid(true);
+        netPayScrollPane.setViewportView(netPay);
 
-        jScrollPane1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        mainFormScrollPane.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
 
-        jTable1.setFont(new java.awt.Font("Tahoma", 0, 21)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        mainForm.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        mainForm.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Rate per Month", "", "Tax (3% of gross)", null},
-                {"Amount Accrued for the Period ", "", "PAG-IBIG", null},
+                {"Amount Accrued", "", "PAG-IBIG", null},
                 {null, null, "SSS", null},
                 {null, null, "Loan", null},
                 {null, null, "Absences", null},
@@ -174,56 +196,56 @@ public class PayslipPopup extends javax.swing.JFrame {
                 "Earnings", "Amount", "Deductions", "Amount"
             }
         ));
-        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
-        jTable1.setRowHeight(45);
-        jTable1.setShowGrid(true);
-        jScrollPane1.setViewportView(jTable1);
+        mainForm.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
+        mainForm.setRowHeight(34);
+        mainForm.setShowGrid(true);
+        mainFormScrollPane.setViewportView(mainForm);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(91, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 869, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 869, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(80, 80, 80))
+        javax.swing.GroupLayout FormsLayout = new javax.swing.GroupLayout(Forms);
+        Forms.setLayout(FormsLayout);
+        FormsLayout.setHorizontalGroup(
+            FormsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FormsLayout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addGroup(FormsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(netPayScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mainFormScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+        FormsLayout.setVerticalGroup(
+            FormsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FormsLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(mainFormScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addComponent(netPayScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 1040, 490));
+        getContentPane().add(Forms, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 700, 340));
 
-        jButton1.setBackground(new java.awt.Color(11, 11, 69));
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 21)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton1.setLabel("BACK");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Back.setBackground(new java.awt.Color(11, 11, 69));
+        Back.setFont(new java.awt.Font("Tahoma", 0, 21)); // NOI18N
+        Back.setForeground(new java.awt.Color(255, 255, 255));
+        Back.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Back.setLabel("BACK");
+        Back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BackActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 860, 179, 43));
+        getContentPane().add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 570, 120, 28));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_BackActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void employeeIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeIDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_employeeIDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -251,21 +273,24 @@ public class PayslipPopup extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton Back;
+    private javax.swing.JPanel Forms;
+    private javax.swing.JLabel displayDate;
+    private javax.swing.JLabel displayName;
+    private javax.swing.JLabel displayPosition;
+    private javax.swing.JTextField employeeID;
+    private javax.swing.JPanel employeeInfo;
+    private javax.swing.JPanel headerPanel;
+    private javax.swing.JLabel logoPlacer;
+    private javax.swing.JTable mainForm;
+    private javax.swing.JScrollPane mainFormScrollPane;
+    private javax.swing.JTable netPay;
+    private javax.swing.JScrollPane netPayScrollPane;
+    private javax.swing.JLabel payPeriod;
+    private javax.swing.JLabel payslip;
+    private javax.swing.JLabel titleDate;
+    private javax.swing.JLabel titleID;
+    private javax.swing.JLabel titleName;
+    private javax.swing.JLabel titlePosition;
     // End of variables declaration//GEN-END:variables
 }
