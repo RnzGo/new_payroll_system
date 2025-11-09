@@ -87,31 +87,33 @@ public class MainFrame extends javax.swing.JFrame {
         lblVETabTitle = new javax.swing.JLabel();
         formtxtViewEmpID = new javax.swing.JFormattedTextField();
         pnlSalaryComp = new javax.swing.JPanel();
-        lblSCTabTitle = new javax.swing.JLabel();
-        lblBrgyIcon = new javax.swing.JLabel();
+        pnlEmpViewInner1 = new javax.swing.JPanel();
         lblSCTitle = new javax.swing.JLabel();
-        lblEmpID = new javax.swing.JLabel();
         lblEmpName = new javax.swing.JLabel();
+        lblDaysWorked = new javax.swing.JLabel();
+        lblDedTax = new javax.swing.JLabel();
+        lblDeductionTitle = new javax.swing.JLabel();
+        lblDedLoan = new javax.swing.JLabel();
+        lblTotDeductions = new javax.swing.JLabel();
+        lblSCTabTitle2 = new javax.swing.JLabel();
+        lblBrgyIcon = new javax.swing.JLabel();
+        lblSCTabTitle1 = new javax.swing.JLabel();
+        lblDedSSS = new javax.swing.JLabel();
+        lblDedPAGIBIG = new javax.swing.JLabel();
+        lblGrossSalary = new javax.swing.JLabel();
+        lblEmpPos = new javax.swing.JLabel();
+        lblRatePerDay = new javax.swing.JLabel();
+        lblEmpID = new javax.swing.JLabel();
+        txtDedPAGIBIG = new javax.swing.JTextField();
         txtEmpID = new javax.swing.JTextField();
         txtEmpName = new javax.swing.JTextField();
         txtEmpPos = new javax.swing.JTextField();
-        lblEmpPos = new javax.swing.JLabel();
-        lblRatePerDay = new javax.swing.JLabel();
-        lblGrossSalary = new javax.swing.JLabel();
-        txtDedPAGIBIG = new javax.swing.JTextField();
-        lblDaysWorked = new javax.swing.JLabel();
-        btnCompute = new javax.swing.JButton();
-        lblDedTax = new javax.swing.JLabel();
-        lblDeductionTitle = new javax.swing.JLabel();
         txtDaysWorked = new javax.swing.JTextField();
-        lblDedPAGIBIG = new javax.swing.JLabel();
-        lblDedSSS = new javax.swing.JLabel();
-        lblDedLoan = new javax.swing.JLabel();
         txtDedTax = new javax.swing.JTextField();
-        txtDedLoan = new javax.swing.JTextField();
-        txtDedSSS = new javax.swing.JTextField();
-        lblTotDeductions = new javax.swing.JLabel();
         txtRatePerDay1 = new javax.swing.JTextField();
+        txtDedSSS = new javax.swing.JTextField();
+        txtDedLoan = new javax.swing.JTextField();
+        btnCompute = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -213,7 +215,7 @@ public class MainFrame extends javax.swing.JFrame {
                 btnEmployeeManagement1ActionPerformed(evt);
             }
         });
-        pnllSideBar.add(btnEmployeeManagement1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 290, -1));
+        pnllSideBar.add(btnEmployeeManagement1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 290, 30));
 
         btnSalaryCompTab1.setBackground(new java.awt.Color(11, 11, 69));
         btnSalaryCompTab1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -475,231 +477,158 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("ViewEmployee", pnlViewEmp);
 
-        lblSCTabTitle.setFont(new java.awt.Font("Tahoma", 1, 23)); // NOI18N
-        lblSCTabTitle.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        lblSCTabTitle.setText("BARANGAY EMPLOYEE SALARY COMPUTATION");
+        pnlSalaryComp.setBackground(new java.awt.Color(209, 209, 209));
+        pnlSalaryComp.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblBrgyIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/payroll_system/assets/placeholder.png"))); // NOI18N
+        pnlEmpViewInner1.setBackground(new java.awt.Color(250, 249, 246));
+        pnlEmpViewInner1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnlEmpViewInner1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblSCTitle.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         lblSCTitle.setText("Computation of Salary");
-
-        lblEmpID.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        lblEmpID.setText("Employee ID:");
+        pnlEmpViewInner1.add(lblSCTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, -1, -1));
 
         lblEmpName.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblEmpName.setText("Employee Name:");
+        pnlEmpViewInner1.add(lblEmpName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
 
-        txtEmpID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmpIDActionPerformed(evt);
-            }
-        });
+        lblDaysWorked.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblDaysWorked.setText("<html>Number of Days<br>Worked:</html>");
+        pnlEmpViewInner1.add(lblDaysWorked, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
 
-        txtEmpName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmpNameActionPerformed(evt);
-            }
-        });
+        lblDedTax.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblDedTax.setText("Tax (3% of Gross Salary):");
+        pnlEmpViewInner1.add(lblDedTax, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, -1, -1));
 
-        txtEmpPos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmpPosActionPerformed(evt);
-            }
-        });
+        lblDeductionTitle.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        lblDeductionTitle.setForeground(new java.awt.Color(210, 4, 45));
+        lblDeductionTitle.setText("Deductions");
+        pnlEmpViewInner1.add(lblDeductionTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, -1, -1));
 
-        lblEmpPos.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        lblEmpPos.setText("Employee Position:");
+        lblDedLoan.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblDedLoan.setText("Loan:");
+        pnlEmpViewInner1.add(lblDedLoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 280, -1, -1));
 
-        lblRatePerDay.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        lblRatePerDay.setText("Rate Per Day:");
+        lblTotDeductions.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTotDeductions.setText("Total Deductions:");
+        pnlEmpViewInner1.add(lblTotDeductions, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 370, -1, -1));
+
+        lblSCTabTitle2.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
+        lblSCTabTitle2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        lblSCTabTitle2.setText("COMPUTATION");
+        pnlEmpViewInner1.add(lblSCTabTitle2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, -1, -1));
+
+        lblBrgyIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/payroll_system/assets/placeholder.png"))); // NOI18N
+        lblBrgyIcon.setPreferredSize(new java.awt.Dimension(110, 110));
+        pnlEmpViewInner1.add(lblBrgyIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        lblSCTabTitle1.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
+        lblSCTabTitle1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        lblSCTabTitle1.setText("BARANGAY EMPLOYEE SALARY ");
+        pnlEmpViewInner1.add(lblSCTabTitle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, -1, -1));
+
+        lblDedSSS.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblDedSSS.setText("SSS:");
+        pnlEmpViewInner1.add(lblDedSSS, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 250, -1, -1));
+
+        lblDedPAGIBIG.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblDedPAGIBIG.setText("PAG-IBIG:");
+        pnlEmpViewInner1.add(lblDedPAGIBIG, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, -1, -1));
 
         lblGrossSalary.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblGrossSalary.setText("Gross Salary:");
+        pnlEmpViewInner1.add(lblGrossSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, -1, -1));
+
+        lblEmpPos.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblEmpPos.setText("Employee Position:");
+        pnlEmpViewInner1.add(lblEmpPos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, -1, -1));
+
+        lblRatePerDay.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblRatePerDay.setText("Rate Per Day:");
+        pnlEmpViewInner1.add(lblRatePerDay, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, -1, -1));
+
+        lblEmpID.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblEmpID.setText("Employee ID:");
+        pnlEmpViewInner1.add(lblEmpID, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
 
         txtDedPAGIBIG.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDedPAGIBIGActionPerformed(evt);
             }
         });
+        pnlEmpViewInner1.add(txtDedPAGIBIG, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 220, 150, 25));
 
-        lblDaysWorked.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        lblDaysWorked.setText("<html>Number of Days<br>Worked:</html>");
+        txtEmpID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmpIDActionPerformed(evt);
+            }
+        });
+        pnlEmpViewInner1.add(txtEmpID, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 150, 25));
+        txtEmpID.getAccessibleContext().setAccessibleName("employeeID");
 
-        btnCompute.setBackground(new java.awt.Color(11, 11, 69));
-        btnCompute.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        btnCompute.setForeground(new java.awt.Color(255, 255, 255));
-        btnCompute.setText("Compute");
+        txtEmpName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmpNameActionPerformed(evt);
+            }
+        });
+        pnlEmpViewInner1.add(txtEmpName, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 150, 25));
+        txtEmpName.getAccessibleContext().setAccessibleName("employeeName");
 
-        lblDedTax.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        lblDedTax.setText("Tax (3% of Gross Salary):");
-
-        lblDeductionTitle.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        lblDeductionTitle.setForeground(new java.awt.Color(210, 4, 45));
-        lblDeductionTitle.setText("Deductions");
+        txtEmpPos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmpPosActionPerformed(evt);
+            }
+        });
+        pnlEmpViewInner1.add(txtEmpPos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, 150, 25));
 
         txtDaysWorked.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDaysWorkedActionPerformed(evt);
             }
         });
-
-        lblDedPAGIBIG.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        lblDedPAGIBIG.setText("PAG-IBIG:");
-
-        lblDedSSS.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        lblDedSSS.setText("SSS:");
-
-        lblDedLoan.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        lblDedLoan.setText("Loan:");
+        pnlEmpViewInner1.add(txtDaysWorked, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 150, 25));
 
         txtDedTax.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDedTaxActionPerformed(evt);
             }
         });
-
-        txtDedLoan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDedLoanActionPerformed(evt);
-            }
-        });
-
-        txtDedSSS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDedSSSActionPerformed(evt);
-            }
-        });
-
-        lblTotDeductions.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblTotDeductions.setText("Total Deductions:");
+        pnlEmpViewInner1.add(txtDedTax, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 190, 150, 25));
 
         txtRatePerDay1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtRatePerDay1ActionPerformed(evt);
             }
         });
+        pnlEmpViewInner1.add(txtRatePerDay1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 150, 25));
 
-        javax.swing.GroupLayout pnlSalaryCompLayout = new javax.swing.GroupLayout(pnlSalaryComp);
-        pnlSalaryComp.setLayout(pnlSalaryCompLayout);
-        pnlSalaryCompLayout.setHorizontalGroup(
-            pnlSalaryCompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlSalaryCompLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(pnlSalaryCompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlSalaryCompLayout.createSequentialGroup()
-                        .addComponent(lblBrgyIcon)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblSCTabTitle))
-                    .addGroup(pnlSalaryCompLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(pnlSalaryCompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblRatePerDay)
-                            .addComponent(lblEmpName)
-                            .addComponent(lblEmpID)
-                            .addComponent(lblEmpPos)
-                            .addComponent(lblDaysWorked, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblGrossSalary))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlSalaryCompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSalaryCompLayout.createSequentialGroup()
-                                .addGroup(pnlSalaryCompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtEmpName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtEmpID, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtDaysWorked, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtEmpPos, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtRatePerDay1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(26, 26, 26)
-                                .addGroup(pnlSalaryCompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblDedTax)
-                                    .addComponent(lblDedPAGIBIG)
-                                    .addComponent(lblDedSSS)
-                                    .addComponent(lblDedLoan)))
-                            .addComponent(lblTotDeductions, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlSalaryCompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDedPAGIBIG, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDedTax, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDedLoan, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDedSSS, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(22, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSalaryCompLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnCompute, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(301, 301, 301))
-            .addGroup(pnlSalaryCompLayout.createSequentialGroup()
-                .addGap(93, 93, 93)
-                .addComponent(lblSCTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblDeductionTitle)
-                .addGap(74, 74, 74))
-        );
-        pnlSalaryCompLayout.setVerticalGroup(
-            pnlSalaryCompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlSalaryCompLayout.createSequentialGroup()
-                .addGroup(pnlSalaryCompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlSalaryCompLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(lblBrgyIcon))
-                    .addGroup(pnlSalaryCompLayout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(lblSCTabTitle)))
-                .addGap(18, 18, 18)
-                .addGroup(pnlSalaryCompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSCTitle)
-                    .addComponent(lblDeductionTitle, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGroup(pnlSalaryCompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlSalaryCompLayout.createSequentialGroup()
-                        .addGroup(pnlSalaryCompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblDedTax)
-                            .addComponent(txtDedTax, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlSalaryCompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblDedPAGIBIG)
-                            .addComponent(txtDedPAGIBIG, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlSalaryCompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblDedSSS)
-                            .addComponent(txtDedSSS, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlSalaryCompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblDedLoan)
-                            .addComponent(txtDedLoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnlSalaryCompLayout.createSequentialGroup()
-                        .addGroup(pnlSalaryCompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlSalaryCompLayout.createSequentialGroup()
-                                .addGap(3, 3, 3)
-                                .addComponent(lblEmpID)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(pnlSalaryCompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblEmpName)
-                                    .addComponent(txtEmpName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(pnlSalaryCompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtEmpPos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblEmpPos))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(pnlSalaryCompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblRatePerDay)
-                                    .addComponent(txtRatePerDay1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(txtEmpID, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(7, 7, 7)
-                        .addComponent(lblDaysWorked, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSalaryCompLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDaysWorked, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(9, 9, 9)
-                .addGroup(pnlSalaryCompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblGrossSalary)
-                    .addComponent(lblTotDeductions))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addComponent(btnCompute, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55))
-        );
+        txtDedSSS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDedSSSActionPerformed(evt);
+            }
+        });
+        pnlEmpViewInner1.add(txtDedSSS, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 250, 150, 25));
 
-        txtEmpID.getAccessibleContext().setAccessibleName("employeeID");
-        txtEmpName.getAccessibleContext().setAccessibleName("employeeName");
+        txtDedLoan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDedLoanActionPerformed(evt);
+            }
+        });
+        pnlEmpViewInner1.add(txtDedLoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 280, 150, -1));
+
+        btnCompute.setBackground(new java.awt.Color(11, 11, 69));
+        btnCompute.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        btnCompute.setForeground(new java.awt.Color(255, 255, 255));
+        btnCompute.setText("Compute");
+        btnCompute.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComputeActionPerformed(evt);
+            }
+        });
+        pnlEmpViewInner1.add(btnCompute, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 420, 132, 35));
         btnCompute.getAccessibleContext().setAccessibleName("compute");
+
+        pnlSalaryComp.add(pnlEmpViewInner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 660, 480));
 
         jTabbedPane1.addTab("SalaryComputation", pnlSalaryComp);
 
@@ -858,6 +787,10 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSearchEmpActionPerformed
 
+    private void btnComputeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComputeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnComputeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -948,7 +881,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblRegEmpName;
     private javax.swing.JLabel lblRegPosition;
     private javax.swing.JLabel lblRegRatePerDay;
-    private javax.swing.JLabel lblSCTabTitle;
+    private javax.swing.JLabel lblSCTabTitle1;
+    private javax.swing.JLabel lblSCTabTitle2;
     private javax.swing.JLabel lblSCTitle;
     private javax.swing.JLabel lblSystem;
     private javax.swing.JLabel lblTotDeductions;
@@ -959,6 +893,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel pnlEmpDeleteInner;
     private javax.swing.JPanel pnlEmpRegInner;
     private javax.swing.JPanel pnlEmpViewInner;
+    private javax.swing.JPanel pnlEmpViewInner1;
     private javax.swing.JPanel pnlEmployeeSubmenu;
     private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlSalaryComp;
