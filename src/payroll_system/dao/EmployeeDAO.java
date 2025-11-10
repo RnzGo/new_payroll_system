@@ -104,7 +104,7 @@ public class EmployeeDAO {
     }
     
     //GET ACTIVE EMPLOYEES
-    public List<Employee> getActiveEmployee(){
+    public List<Employee> getActiveEmployees(){
         List<Employee> employees = new ArrayList<>();
         String sql = "SELECT * FROM employees WHERE emp_status = 'Active'";
         
