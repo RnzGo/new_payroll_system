@@ -58,8 +58,8 @@ public class PayrollPopup extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
-    // Do not exit the whole application when this popup is closed
-    setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Payroll");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("System Logo");
@@ -242,10 +242,10 @@ public class PayrollPopup extends javax.swing.JFrame {
                 .addGap(126, 126, 126))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel15)
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                            .addGap(88, 88, 88)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel15)
                             .addComponent(jLabel8)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(192, 192, 192)
