@@ -23,14 +23,21 @@ public class PayrollService {
             int choice = getIntInput("Choose an option: ");
             
             switch (choice) {
-                case 1 -> employeeManagement();
-                case 2 -> payrollManagement();
-                case 3 -> computeSalary();
-                case 4 -> {
+                case 1:
+                    employeeManagement();
+                    break;
+                case 2:
+                    payrollManagement();
+                    break;
+                case 3:
+                    computeSalary();
+                    break;
+                case 4:
                     System.out.println("Exiting Program...");
                     return;
-                }
-                default -> System.out.println("Invalid option");
+                default:
+                    System.out.println("Invalid option");
+                    break;
             }
         }
     }

@@ -4,6 +4,17 @@
  */
 package gui;
 
+import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import payroll_system.dao.EmployeeDAO;
+import payroll_system.dao.AttendanceDAO;
+import payroll_system.dao.PayrollDAO;
+import payroll_system.dao.PayrollPeriodDAO;
+import payroll_system.model.Employee;
+import payroll_system.model.Payroll;
+import java.time.LocalDate;
+
 /**
  *
  * @author Admin
@@ -18,7 +29,101 @@ public class MainFrame extends javax.swing.JFrame {
         this.pack();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        // Make delete-panel fields read-only (user inputs ID into jTextField2 only)
+        txtDelEmpName.setEditable(false);
+        txtDelPosition.setEditable(false);
+        formtxtDelRate.setEditable(false);
+        txtDelDept.setEditable(false);
+        txtDelAddress.setEditable(false);
+        formtxtDelContact.setEditable(false);
+
+        // When user presses Enter in the Delete ID field (jTextField2), load employee and autofill
+        jTextField2.addActionListener(evt -> {
+            String idTxt = jTextField2.getText().trim();
+            if (idTxt.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please enter an Employee ID to load.", "Input required", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            try {
+                int id = Integer.parseInt(idTxt.replaceAll("[^0-9]", ""));
+                EmployeeDAO dao = new EmployeeDAO();
+                Employee emp = dao.getEmployeeById(id);
+                if (emp == null) {
+                    selectedEmpId = -1;
+                    // clear fields
+                    txtDelEmpName.setText("");
+                    txtDelPosition.setText("");
+                    formtxtDelRate.setText("");
+                    txtDelDept.setText("");
+                    txtDelAddress.setText("");
+                    formtxtDelContact.setText("");
+                    JOptionPane.showMessageDialog(this, "Employee not found.", "Not found", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    selectedEmpId = emp.getEmpId();
+                    txtDelEmpName.setText(emp.getEmpName());
+                    txtDelPosition.setText(emp.getEmpPosition());
+                    formtxtDelRate.setText(String.valueOf(emp.getRatePerDay()));
+                    // department isn't part of Employee model; leave empty or extend model if needed
+                    txtDelDept.setText("");
+                    txtDelAddress.setText(emp.getEmpAddress());
+                    formtxtDelContact.setText(emp.getContactNumber());
+                    JOptionPane.showMessageDialog(this, "Employee loaded.", "Loaded", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Invalid Employee ID.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+        // Make salary computation name/position/rate fields read-only and autofill when ID entered
+        txtEmpName.setEditable(false);
+        txtEmpPos.setEditable(false);
+        txtRatePerDay1.setEditable(false);
+
+        txtEmpID.addActionListener(evt -> {
+            String idTxt = txtEmpID.getText().trim();
+            if (idTxt.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please enter an Employee ID to load.", "Input required", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            try {
+                int id = Integer.parseInt(idTxt.replaceAll("[^0-9]", ""));
+                EmployeeDAO dao = new EmployeeDAO();
+                Employee emp = dao.getEmployeeById(id);
+                if (emp == null) {
+                    selectedEmpId = -1;
+                    txtEmpName.setText("");
+                    txtEmpPos.setText("");
+                    txtRatePerDay1.setText("");
+                    JOptionPane.showMessageDialog(this, "Employee not found.", "Not found", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    selectedEmpId = emp.getEmpId();
+                    txtEmpName.setText(emp.getEmpName());
+                    txtEmpPos.setText(emp.getEmpPosition());
+                    txtRatePerDay1.setText(String.valueOf(emp.getRatePerDay()));
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Invalid Employee ID.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+        // Auto-recalculate gross and deductions when related fields change
+        DocumentListener recalcListener = new DocumentListener() {
+            public void insertUpdate(DocumentEvent e) { updateComputedFields(); }
+            public void removeUpdate(DocumentEvent e) { updateComputedFields(); }
+            public void changedUpdate(DocumentEvent e) { updateComputedFields(); }
+        };
+
+        // fields affecting gross
+        txtRatePerDay1.getDocument().addDocumentListener(recalcListener);
+        txtDaysWorked.getDocument().addDocumentListener(recalcListener);
+
+        // fields affecting deductions
+        txtDedTax.getDocument().addDocumentListener(recalcListener);
+        txtDedPAGIBIG.getDocument().addDocumentListener(recalcListener);
+        txtDedSSS.getDocument().addDocumentListener(recalcListener);
+        txtDedLoan.getDocument().addDocumentListener(recalcListener);
     }
+
+    // Holds the currently selected employee id from searches
+    private int selectedEmpId = -1;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -79,6 +184,8 @@ public class MainFrame extends javax.swing.JFrame {
         lblDelDept = new javax.swing.JLabel();
         txtDelAddress = new javax.swing.JTextField();
         lblDelContact = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        lblDelEmpName1 = new javax.swing.JLabel();
         pnlViewEmp = new javax.swing.JPanel();
         pnlEmpViewInner = new javax.swing.JPanel();
         lblBrgyIcon4 = new javax.swing.JLabel();
@@ -86,6 +193,8 @@ public class MainFrame extends javax.swing.JFrame {
         btnSearchEmp = new javax.swing.JButton();
         lblVETabTitle = new javax.swing.JLabel();
         formtxtViewEmpID = new javax.swing.JFormattedTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         pnlSalaryComp = new javax.swing.JPanel();
         pnlEmpViewInner1 = new javax.swing.JPanel();
         lblSCTitle = new javax.swing.JLabel();
@@ -100,7 +209,6 @@ public class MainFrame extends javax.swing.JFrame {
         lblSCTabTitle1 = new javax.swing.JLabel();
         lblDedSSS = new javax.swing.JLabel();
         lblDedPAGIBIG = new javax.swing.JLabel();
-        lblGrossSalary = new javax.swing.JLabel();
         lblEmpPos = new javax.swing.JLabel();
         lblRatePerDay = new javax.swing.JLabel();
         lblEmpID = new javax.swing.JLabel();
@@ -114,6 +222,11 @@ public class MainFrame extends javax.swing.JFrame {
         txtDedSSS = new javax.swing.JTextField();
         txtDedLoan = new javax.swing.JTextField();
         btnCompute = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        lblGrossSalary1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -138,7 +251,7 @@ public class MainFrame extends javax.swing.JFrame {
         lblBrgyIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/payroll_system/assets/placeholder.png"))); // NOI18N
         pnlHeader.add(lblBrgyIcon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 130, 130));
 
-        getContentPane().add(pnlHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1024, -1));
+        getContentPane().add(pnlHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1024, 160));
 
         pnllSideBar.setBackground(new java.awt.Color(11, 11, 69));
         pnllSideBar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -363,41 +476,44 @@ public class MainFrame extends javax.swing.JFrame {
         pnlEmpDeleteInner.add(lblDETabTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, -1, -1));
 
         lblDelEmpName.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        lblDelEmpName.setText("Employee Name:");
+        lblDelEmpName.setText("Employee ID:");
         pnlEmpDeleteInner.add(lblDelEmpName, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, -1, -1));
 
+        txtDelEmpName.setEditable(false);
         txtDelEmpName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDelEmpNameActionPerformed(evt);
             }
         });
-        pnlEmpDeleteInner.add(txtDelEmpName, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 200, -1));
+        pnlEmpDeleteInner.add(txtDelEmpName, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, 200, -1));
 
         lblDelPosition.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lblDelPosition.setText("Employee Position:");
-        pnlEmpDeleteInner.add(lblDelPosition, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, -1, -1));
+        pnlEmpDeleteInner.add(lblDelPosition, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, -1, -1));
 
+        txtDelPosition.setEditable(false);
         txtDelPosition.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDelPositionActionPerformed(evt);
             }
         });
-        pnlEmpDeleteInner.add(txtDelPosition, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, 200, -1));
+        pnlEmpDeleteInner.add(txtDelPosition, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 200, -1));
 
         lblDelRatePerDay.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lblDelRatePerDay.setText("Rate per Day:");
-        pnlEmpDeleteInner.add(lblDelRatePerDay, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, -1, 20));
+        pnlEmpDeleteInner.add(lblDelRatePerDay, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, -1, 20));
 
         lblDelAddress.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lblDelAddress.setText("Home Address:");
-        pnlEmpDeleteInner.add(lblDelAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, -1, -1));
+        pnlEmpDeleteInner.add(lblDelAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, -1, -1));
 
+        formtxtDelContact.setEditable(false);
         formtxtDelContact.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 formtxtDelContactActionPerformed(evt);
             }
         });
-        pnlEmpDeleteInner.add(formtxtDelContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 260, 200, -1));
+        pnlEmpDeleteInner.add(formtxtDelContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, 200, -1));
 
         btnDelEmp.setBackground(new java.awt.Color(11, 11, 69));
         btnDelEmp.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -408,36 +524,44 @@ public class MainFrame extends javax.swing.JFrame {
                 btnDelEmpActionPerformed(evt);
             }
         });
-        pnlEmpDeleteInner.add(btnDelEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 380, 190, -1));
+        pnlEmpDeleteInner.add(btnDelEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 380, 200, -1));
 
+        formtxtDelRate.setEditable(false);
         formtxtDelRate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 formtxtDelRateActionPerformed(evt);
             }
         });
-        pnlEmpDeleteInner.add(formtxtDelRate, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, 200, -1));
+        pnlEmpDeleteInner.add(formtxtDelRate, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 200, 200, -1));
 
+        txtDelDept.setEditable(false);
         txtDelDept.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDelDeptActionPerformed(evt);
             }
         });
-        pnlEmpDeleteInner.add(txtDelDept, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 200, -1));
+        pnlEmpDeleteInner.add(txtDelDept, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, 200, -1));
 
         lblDelDept.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lblDelDept.setText("Department:");
-        pnlEmpDeleteInner.add(lblDelDept, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, -1, -1));
+        pnlEmpDeleteInner.add(lblDelDept, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, -1, -1));
 
+        txtDelAddress.setEditable(false);
         txtDelAddress.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDelAddressActionPerformed(evt);
             }
         });
-        pnlEmpDeleteInner.add(txtDelAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 200, 200, -1));
+        pnlEmpDeleteInner.add(txtDelAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 260, 200, -1));
 
         lblDelContact.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lblDelContact.setText("Contact Number: ");
-        pnlEmpDeleteInner.add(lblDelContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, -1, -1));
+        pnlEmpDeleteInner.add(lblDelContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 300, -1, -1));
+        pnlEmpDeleteInner.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 200, -1));
+
+        lblDelEmpName1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lblDelEmpName1.setText("Employee Name:");
+        pnlEmpDeleteInner.add(lblDelEmpName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, -1, -1));
 
         pnlDelEmp.add(pnlEmpDeleteInner, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 660, 480));
 
@@ -448,14 +572,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         pnlEmpViewInner.setBackground(new java.awt.Color(250, 249, 246));
         pnlEmpViewInner.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        pnlEmpViewInner.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblBrgyIcon4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/payroll_system/assets/placeholder.png"))); // NOI18N
-        pnlEmpViewInner.add(lblBrgyIcon4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, -1, -1));
 
         lblViewEmpName.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lblViewEmpName.setText("Employee ID:");
-        pnlEmpViewInner.add(lblViewEmpName, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, -1, -1));
 
         btnSearchEmp.setBackground(new java.awt.Color(11, 11, 69));
         btnSearchEmp.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -466,14 +587,66 @@ public class MainFrame extends javax.swing.JFrame {
                 btnSearchEmpActionPerformed(evt);
             }
         });
-        pnlEmpViewInner.add(btnSearchEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 190, 30));
 
         lblVETabTitle.setFont(new java.awt.Font("Tahoma", 1, 34)); // NOI18N
         lblVETabTitle.setText("View Employee");
-        pnlEmpViewInner.add(lblVETabTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, -1, -1));
-        pnlEmpViewInner.add(formtxtViewEmpID, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 210, -1));
 
-        pnlViewEmp.add(pnlEmpViewInner, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 660, 480));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, "", "", ""},
+                {null, null, null, null, null, ""}
+            },
+            new String [] {
+                "Name", "Position", "Department", "Rate Per Day", "Address", "Contact #"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+        jTable1.getAccessibleContext().setAccessibleName("employeeInfo");
+
+        javax.swing.GroupLayout pnlEmpViewInnerLayout = new javax.swing.GroupLayout(pnlEmpViewInner);
+        pnlEmpViewInner.setLayout(pnlEmpViewInnerLayout);
+        pnlEmpViewInnerLayout.setHorizontalGroup(
+            pnlEmpViewInnerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlEmpViewInnerLayout.createSequentialGroup()
+                .addGroup(pnlEmpViewInnerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlEmpViewInnerLayout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(lblBrgyIcon4)
+                        .addGap(50, 50, 50)
+                        .addComponent(lblVETabTitle))
+                    .addGroup(pnlEmpViewInnerLayout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addComponent(lblViewEmpName)
+                        .addGap(3, 3, 3)
+                        .addComponent(formtxtViewEmpID, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSearchEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlEmpViewInnerLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+        pnlEmpViewInnerLayout.setVerticalGroup(
+            pnlEmpViewInnerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlEmpViewInnerLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(pnlEmpViewInnerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblBrgyIcon4)
+                    .addGroup(pnlEmpViewInnerLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(lblVETabTitle)))
+                .addGap(16, 16, 16)
+                .addGroup(pnlEmpViewInnerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblViewEmpName)
+                    .addGroup(pnlEmpViewInnerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(formtxtViewEmpID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSearchEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(185, Short.MAX_VALUE))
+        );
+
+        pnlViewEmp.add(pnlEmpViewInner, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 680, 480));
 
         jTabbedPane1.addTab("ViewEmployee", pnlViewEmp);
 
@@ -486,32 +659,33 @@ public class MainFrame extends javax.swing.JFrame {
 
         lblSCTitle.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         lblSCTitle.setText("Computation of Salary");
-        pnlEmpViewInner1.add(lblSCTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, -1, -1));
+        pnlEmpViewInner1.add(lblSCTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
 
         lblEmpName.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblEmpName.setText("Employee Name:");
-        pnlEmpViewInner1.add(lblEmpName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
+        pnlEmpViewInner1.add(lblEmpName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
 
         lblDaysWorked.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblDaysWorked.setText("<html>Number of Days<br>Worked:</html>");
-        pnlEmpViewInner1.add(lblDaysWorked, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
+        pnlEmpViewInner1.add(lblDaysWorked, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
 
         lblDedTax.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblDedTax.setText("Tax (3% of Gross Salary):");
-        pnlEmpViewInner1.add(lblDedTax, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, -1, -1));
+        pnlEmpViewInner1.add(lblDedTax, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, -1, -1));
 
         lblDeductionTitle.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         lblDeductionTitle.setForeground(new java.awt.Color(210, 4, 45));
         lblDeductionTitle.setText("Deductions");
-        pnlEmpViewInner1.add(lblDeductionTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, -1, -1));
+        pnlEmpViewInner1.add(lblDeductionTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, -1, -1));
 
         lblDedLoan.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblDedLoan.setText("Loan:");
-        pnlEmpViewInner1.add(lblDedLoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 280, -1, -1));
+        pnlEmpViewInner1.add(lblDedLoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 310, -1, -1));
 
         lblTotDeductions.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTotDeductions.setForeground(new java.awt.Color(210, 4, 45));
         lblTotDeductions.setText("Total Deductions:");
-        pnlEmpViewInner1.add(lblTotDeductions, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 370, -1, -1));
+        pnlEmpViewInner1.add(lblTotDeductions, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 390, -1, -1));
 
         lblSCTabTitle2.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
         lblSCTabTitle2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
@@ -529,92 +703,91 @@ public class MainFrame extends javax.swing.JFrame {
 
         lblDedSSS.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblDedSSS.setText("SSS:");
-        pnlEmpViewInner1.add(lblDedSSS, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 250, -1, -1));
+        pnlEmpViewInner1.add(lblDedSSS, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 280, -1, -1));
 
         lblDedPAGIBIG.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblDedPAGIBIG.setText("PAG-IBIG:");
-        pnlEmpViewInner1.add(lblDedPAGIBIG, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, -1, -1));
-
-        lblGrossSalary.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblGrossSalary.setText("Gross Salary:");
-        pnlEmpViewInner1.add(lblGrossSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, -1, -1));
+        pnlEmpViewInner1.add(lblDedPAGIBIG, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 250, -1, -1));
 
         lblEmpPos.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblEmpPos.setText("Employee Position:");
-        pnlEmpViewInner1.add(lblEmpPos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, -1, -1));
+        pnlEmpViewInner1.add(lblEmpPos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
 
         lblRatePerDay.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblRatePerDay.setText("Rate Per Day:");
-        pnlEmpViewInner1.add(lblRatePerDay, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, -1, -1));
+        pnlEmpViewInner1.add(lblRatePerDay, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, -1, -1));
 
         lblEmpID.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblEmpID.setText("Employee ID:");
-        pnlEmpViewInner1.add(lblEmpID, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
+        pnlEmpViewInner1.add(lblEmpID, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
 
         txtDedPAGIBIG.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDedPAGIBIGActionPerformed(evt);
             }
         });
-        pnlEmpViewInner1.add(txtDedPAGIBIG, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 220, 150, 25));
+        pnlEmpViewInner1.add(txtDedPAGIBIG, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 250, 150, 25));
 
         txtEmpID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmpIDActionPerformed(evt);
             }
         });
-        pnlEmpViewInner1.add(txtEmpID, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 150, 25));
+        pnlEmpViewInner1.add(txtEmpID, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 150, 25));
         txtEmpID.getAccessibleContext().setAccessibleName("employeeID");
 
+        txtEmpName.setEditable(false);
         txtEmpName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmpNameActionPerformed(evt);
             }
         });
-        pnlEmpViewInner1.add(txtEmpName, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 150, 25));
+        pnlEmpViewInner1.add(txtEmpName, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, 150, 25));
         txtEmpName.getAccessibleContext().setAccessibleName("employeeName");
 
+        txtEmpPos.setEditable(false);
         txtEmpPos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmpPosActionPerformed(evt);
             }
         });
-        pnlEmpViewInner1.add(txtEmpPos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, 150, 25));
+        pnlEmpViewInner1.add(txtEmpPos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 150, 25));
 
         txtDaysWorked.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDaysWorkedActionPerformed(evt);
             }
         });
-        pnlEmpViewInner1.add(txtDaysWorked, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 150, 25));
+        pnlEmpViewInner1.add(txtDaysWorked, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 150, 25));
 
         txtDedTax.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDedTaxActionPerformed(evt);
             }
         });
-        pnlEmpViewInner1.add(txtDedTax, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 190, 150, 25));
+        pnlEmpViewInner1.add(txtDedTax, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 220, 150, 25));
 
+        txtRatePerDay1.setEditable(false);
         txtRatePerDay1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtRatePerDay1ActionPerformed(evt);
             }
         });
-        pnlEmpViewInner1.add(txtRatePerDay1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 150, 25));
+        pnlEmpViewInner1.add(txtRatePerDay1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 150, 25));
 
         txtDedSSS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDedSSSActionPerformed(evt);
             }
         });
-        pnlEmpViewInner1.add(txtDedSSS, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 250, 150, 25));
+        pnlEmpViewInner1.add(txtDedSSS, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 280, 150, 25));
 
         txtDedLoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDedLoanActionPerformed(evt);
             }
         });
-        pnlEmpViewInner1.add(txtDedLoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 280, 150, -1));
+        pnlEmpViewInner1.add(txtDedLoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 310, 150, -1));
 
         btnCompute.setBackground(new java.awt.Color(11, 11, 69));
         btnCompute.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -627,6 +800,33 @@ public class MainFrame extends javax.swing.JFrame {
         });
         pnlEmpViewInner1.add(btnCompute, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 420, 132, 35));
         btnCompute.getAccessibleContext().setAccessibleName("compute");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("Pay Period:");
+        pnlEmpViewInner1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, -1, -1));
+
+        jTextField1.setText("YYYY-MM-DD");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        pnlEmpViewInner1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, 90, -1));
+
+        lblGrossSalary1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblGrossSalary1.setText("Gross Salary:");
+        pnlEmpViewInner1.add(lblGrossSalary1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, -1, -1));
+
+        jLabel2.setText("–");
+        pnlEmpViewInner1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, 10, 20));
+
+        jTextField3.setText("YYYY-MM-DD");
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+        pnlEmpViewInner1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 90, -1));
 
         pnlSalaryComp.add(pnlEmpViewInner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 660, 480));
 
@@ -647,7 +847,6 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPayrollTabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayrollTabActionPerformed
-        // TODO add your handling code here:
         // Open the Payroll popup window
         java.awt.EventQueue.invokeLater(() -> {
             PayrollPopup popup = new PayrollPopup();
@@ -657,22 +856,17 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPayrollTabActionPerformed
 
     private void btnAddEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEmployeeActionPerformed
-        // TODO add your handling code here:
     jTabbedPane1.setSelectedIndex(0);
     }//GEN-LAST:event_btnAddEmployeeActionPerformed
 
     private void btnEmployeeManagement1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmployeeManagement1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_btnEmployeeManagement1ActionPerformed
 
     private void btnSalaryCompTab1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalaryCompTab1ActionPerformed
-        // TODO add your handling code here:
-        
     jTabbedPane1.setSelectedIndex(3);
     }//GEN-LAST:event_btnSalaryCompTab1ActionPerformed
 
     private void btnPayslipTabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayslipTabActionPerformed
-        // TODO add your handling code here:
         // Open the Payslip popup window
         java.awt.EventQueue.invokeLater(() -> {
             PayslipPopup popup = new PayslipPopup();
@@ -682,114 +876,299 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPayslipTabActionPerformed
 
     private void btnViewEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewEmployeeActionPerformed
-        // TODO add your handling code here:
     jTabbedPane1.setSelectedIndex(2);
     }//GEN-LAST:event_btnViewEmployeeActionPerformed
 
     private void btnDelEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelEmployeeActionPerformed
-        // TODO add your handling code here:
     jTabbedPane1.setSelectedIndex(1);
     }//GEN-LAST:event_btnDelEmployeeActionPerformed
 
     private void txtEmpNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmpNameActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtEmpNameActionPerformed
 
     private void txtEmpIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmpIDActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtEmpIDActionPerformed
 
     private void txtEmpPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmpPosActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtEmpPosActionPerformed
 
     private void txtDedPAGIBIGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDedPAGIBIGActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtDedPAGIBIGActionPerformed
 
     private void txtDaysWorkedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDaysWorkedActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtDaysWorkedActionPerformed
 
     private void txtDedTaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDedTaxActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtDedTaxActionPerformed
 
     private void txtDedLoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDedLoanActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtDedLoanActionPerformed
 
     private void txtDedSSSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDedSSSActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtDedSSSActionPerformed
 
     private void txtRatePerDay1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRatePerDay1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtRatePerDay1ActionPerformed
 
     private void txtRegEmpNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRegEmpNameActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtRegEmpNameActionPerformed
 
     private void formtxtRateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formtxtRateActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_formtxtRateActionPerformed
 
     private void txtRegDept1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRegDept1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtRegDept1ActionPerformed
 
     private void txtRegPositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRegPositionActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtRegPositionActionPerformed
 
     private void txtRegAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRegAddressActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtRegAddressActionPerformed
 
     private void formtxtContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formtxtContactActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_formtxtContactActionPerformed
 
     private void btnAddEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEmpActionPerformed
-        // TODO add your handling code here:
+        // Gather input from registration fields and add employee to database
+        try {
+            String name = txtRegEmpName.getText().trim();
+            String position = txtRegPosition.getText().trim();
+            String rateTxt = formtxtRate.getText().trim();
+            double rate = 0.0;
+            if (!rateTxt.isEmpty()) {
+                rate = Double.parseDouble(rateTxt.replaceAll("[,₱\\s]", ""));
+            }
+            String address = txtRegAddress.getText().trim();
+            String contact = formtxtContact.getText().trim();
+
+            if (name.isEmpty() || position.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Name and position are required.", "Validation", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            Employee emp = new Employee();
+            emp.setEmpName(name);
+            emp.setEmpPosition(position);
+            emp.setRatePerDay(rate);
+            emp.setEmpAddress(address);
+            emp.setContactNumber(contact);
+            emp.setEmpStatus("Active");
+
+            EmployeeDAO dao = new EmployeeDAO();
+            boolean success = dao.addEmployee(emp);
+            if (success) {
+                JOptionPane.showMessageDialog(this, "Employee added successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                // Clear fields
+                txtRegEmpName.setText("");
+                txtRegPosition.setText("");
+                formtxtRate.setText("");
+                txtRegDept1.setText("");
+                txtRegAddress.setText("");
+                formtxtContact.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to add employee. Check logs.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Invalid numeric value entered.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnAddEmpActionPerformed
 
     private void txtDelEmpNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDelEmpNameActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtDelEmpNameActionPerformed
 
     private void txtDelPositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDelPositionActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtDelPositionActionPerformed
 
     private void formtxtDelContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formtxtDelContactActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_formtxtDelContactActionPerformed
 
     private void btnDelEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelEmpActionPerformed
-            // TODO add your handling code here:
+            // Archive (mark inactive) the selected employee
+            if (selectedEmpId == -1) {
+                JOptionPane.showMessageDialog(this, "Please search and select an employee first.", "No Selection", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to archive this employee?", "Confirm Archive", JOptionPane.YES_NO_OPTION);
+            if (confirm != JOptionPane.YES_OPTION) return;
+
+            EmployeeDAO dao = new EmployeeDAO();
+            boolean success = dao.archiveEmployee(selectedEmpId);
+            if (success) {
+                JOptionPane.showMessageDialog(this, "Employee archived successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                // clear selection and fields
+                selectedEmpId = -1;
+                txtDelEmpName.setText("");
+                txtDelPosition.setText("");
+                formtxtDelRate.setText("");
+                txtDelDept.setText("");
+                txtDelAddress.setText("");
+                formtxtDelContact.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to archive employee.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
     }//GEN-LAST:event_btnDelEmpActionPerformed
 
     private void formtxtDelRateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formtxtDelRateActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_formtxtDelRateActionPerformed
 
     private void txtDelDeptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDelDeptActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtDelDeptActionPerformed
 
     private void txtDelAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDelAddressActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtDelAddressActionPerformed
 
     private void btnSearchEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchEmpActionPerformed
-        // TODO add your handling code here:
+        // Search employee by ID and populate fields
+        try {
+            String idTxt = formtxtViewEmpID.getText().trim();
+            if (idTxt.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please enter an Employee ID to search.", "Input required", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            int id = Integer.parseInt(idTxt.replaceAll("[^0-9]", ""));
+            EmployeeDAO dao = new EmployeeDAO();
+            Employee emp = dao.getEmployeeById(id);
+            if (emp == null) {
+                // Clear table if nothing found
+                javax.swing.table.DefaultTableModel emptyModel = (javax.swing.table.DefaultTableModel) jTable1.getModel();
+                emptyModel.setRowCount(0);
+                JOptionPane.showMessageDialog(this, "Employee not found.", "Not found", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+
+            selectedEmpId = emp.getEmpId();
+            txtDelEmpName.setText(emp.getEmpName());
+            txtDelPosition.setText(emp.getEmpPosition());
+            formtxtDelRate.setText(String.valueOf(emp.getRatePerDay()));
+            txtDelAddress.setText(emp.getEmpAddress());
+            formtxtDelContact.setText(emp.getContactNumber());
+
+            // Also populate salary computation fields
+            txtEmpID.setText(String.valueOf(emp.getEmpId()));
+            txtEmpName.setText(emp.getEmpName());
+            txtEmpPos.setText(emp.getEmpPosition());
+            txtRatePerDay1.setText(String.valueOf(emp.getRatePerDay()));
+
+            // Populate the View Employee table with the single employee row.
+            javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) jTable1.getModel();
+            // clear any placeholder/sample rows
+            model.setRowCount(0);
+            model.addRow(new Object[]{
+                emp.getEmpName(),
+                emp.getEmpPosition(),
+                "", // department not stored in Employee model
+                String.format("%,.2f", emp.getRatePerDay()),
+                emp.getEmpAddress(),
+                emp.getContactNumber()
+            });
+
+            JOptionPane.showMessageDialog(this, "Employee loaded.", "Loaded", JOptionPane.INFORMATION_MESSAGE);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Invalid Employee ID.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnSearchEmpActionPerformed
 
     private void btnComputeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComputeActionPerformed
-        // TODO add your handling code here:
+        // Compute gross, deductions and net pay. Optionally save to payroll.
+        try {
+            String empIdTxt = txtEmpID.getText().trim();
+            if (empIdTxt.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please enter or load an Employee ID.", "Input required", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            int empId = Integer.parseInt(empIdTxt.replaceAll("[^0-9]", ""));
+            double rate = Double.parseDouble(txtRatePerDay1.getText().trim());
+            double daysWorked = Double.parseDouble(txtDaysWorked.getText().trim());
+
+            double tax = parseDoubleOrZero(txtDedTax.getText());
+            double pagibig = parseDoubleOrZero(txtDedPAGIBIG.getText());
+            double sss = parseDoubleOrZero(txtDedSSS.getText());
+            double loan = parseDoubleOrZero(txtDedLoan.getText());
+
+            double gross = rate * daysWorked;
+            double totalDeductions = tax + pagibig + sss + loan;
+            double net = gross - totalDeductions;
+
+            lblGrossSalary1.setText(String.format("Gross Salary: ₱%,.2f", gross));
+            lblTotDeductions.setText(String.format("Total Deductions: ₱%,.2f", totalDeductions));
+
+            int save = JOptionPane.showConfirmDialog(this, String.format("Net pay: ₱%,.2f\nSave this computation to payroll?", net), "Computation Result", JOptionPane.YES_NO_OPTION);
+            if (save == JOptionPane.YES_OPTION) {
+                // record attendance and payroll (use period of last 14 days as existing logic)
+                AttendanceDAO attendanceDAO = new AttendanceDAO();
+                LocalDate periodStart = LocalDate.now().minusDays(14);
+                LocalDate periodEnd = LocalDate.now();
+                int daysWorkedId = attendanceDAO.recordAttendance(empId, daysWorked, periodStart, periodEnd);
+                if (daysWorkedId <= 0) {
+                    JOptionPane.showMessageDialog(this, "Failed to record attendance.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                PayrollPeriodDAO periodDAO = new PayrollPeriodDAO();
+                int periodId = periodDAO.getOrCreatePayrollPeriod(periodStart, periodEnd);
+                if (periodId == -1) {
+                    JOptionPane.showMessageDialog(this, "Failed to get or create payroll period.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                Payroll payroll = new Payroll();
+                payroll.setEmpId(empId);
+                payroll.setPeriodId(periodId);
+                payroll.setDaysWorkedId(daysWorkedId);
+                payroll.setGrossPay(gross);
+                payroll.setTotalDeductions(totalDeductions);
+                payroll.setNetPay(net);
+
+                PayrollDAO payrollDAO = new PayrollDAO();
+                boolean ok = payrollDAO.generatePayroll(payroll);
+                if (ok) {
+                    JOptionPane.showMessageDialog(this, "Payroll saved successfully.", "Saved", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Failed to save payroll.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Please ensure numeric fields are valid.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnComputeActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // Placeholder for form action; no-op
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    // Recalculate and update gross salary and total deductions labels
+    private void updateComputedFields() {
+        double rate = parseDoubleOrZero(txtRatePerDay1.getText());
+        double days = parseDoubleOrZero(txtDaysWorked.getText());
+        double gross = rate * days;
+
+        double tax = parseDoubleOrZero(txtDedTax.getText());
+        double pagibig = parseDoubleOrZero(txtDedPAGIBIG.getText());
+        double sss = parseDoubleOrZero(txtDedSSS.getText());
+        double loan = parseDoubleOrZero(txtDedLoan.getText());
+        double totalDeductions = tax + pagibig + sss + loan;
+
+        lblGrossSalary1.setText(String.format("Gross Salary: ₱%,.2f", gross));
+        lblTotDeductions.setText(String.format("Total Deductions: ₱%,.2f", totalDeductions));
+    }
+
+    // Utility: parse a double or return 0
+    private double parseDoubleOrZero(String txt) {
+        if (txt == null) return 0.0;
+        String cleaned = txt.trim().replaceAll("[,₱\\s]", "");
+        if (cleaned.isEmpty()) return 0.0;
+        try {
+            return Double.parseDouble(cleaned);
+        } catch (NumberFormatException ex) {
+            return 0.0;
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -844,10 +1223,17 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField formtxtDelRate;
     private javax.swing.JFormattedTextField formtxtRate;
     private javax.swing.JFormattedTextField formtxtViewEmpID;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel lblBrgyIcon;
     private javax.swing.JLabel lblBrgyIcon1;
     private javax.swing.JLabel lblBrgyIcon2;
@@ -864,13 +1250,14 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblDelContact;
     private javax.swing.JLabel lblDelDept;
     private javax.swing.JLabel lblDelEmpName;
+    private javax.swing.JLabel lblDelEmpName1;
     private javax.swing.JLabel lblDelPosition;
     private javax.swing.JLabel lblDelRatePerDay;
     private javax.swing.JLabel lblERTabTitle;
     private javax.swing.JLabel lblEmpID;
     private javax.swing.JLabel lblEmpName;
     private javax.swing.JLabel lblEmpPos;
-    private javax.swing.JLabel lblGrossSalary;
+    private javax.swing.JLabel lblGrossSalary1;
     private javax.swing.JLabel lblHeaderTitle;
     private javax.swing.JLabel lblManagement;
     private javax.swing.JLabel lblPayroll;

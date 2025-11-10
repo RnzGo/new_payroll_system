@@ -4,6 +4,13 @@
  */
 package gui;
 
+import payroll_system.dao.EmployeeDAO;
+import payroll_system.dao.PayrollDAO;
+import payroll_system.model.Employee;
+import payroll_system.model.Payroll;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 /**
  *
  * @author Ong
@@ -266,7 +273,84 @@ public class PayslipPopup extends javax.swing.JFrame {
     }//GEN-LAST:event_BackActionPerformed
 
     private void employeeIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeIDActionPerformed
-        // TODO add your handling code here:
+        String idTxt = employeeID.getText().trim();
+        if (idTxt.isEmpty()) {
+            logger.info("No employee ID entered.");
+            return;
+        }
+
+        try {
+            int empId = Integer.parseInt(idTxt.replaceAll("[^0-9]", ""));
+
+            EmployeeDAO empDao = new EmployeeDAO();
+            Employee emp = empDao.getEmployeeById(empId);
+
+            if (emp == null) {
+                displayName.setText("[Employee Name]");
+                displayPosition.setText("[Employee Position]");
+                displayDate.setText("[MM/DD/YY]");
+                // clear tables
+                javax.swing.table.DefaultTableModel mf = (javax.swing.table.DefaultTableModel) mainForm.getModel();
+                // reset amounts to empty
+                for (int r = 0; r < mf.getRowCount(); r++) {
+                    mf.setValueAt("", r, 1);
+                    mf.setValueAt("", r, 3);
+                }
+                javax.swing.table.DefaultTableModel np = (javax.swing.table.DefaultTableModel) netPay.getModel();
+                np.setValueAt("", 0, 1);
+
+                javax.swing.JOptionPane.showMessageDialog(this, "Employee not found.", "Not found", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+
+            displayName.setText(emp.getEmpName());
+            displayPosition.setText(emp.getEmpPosition());
+
+            // Attempt to fetch latest payroll for this employee
+            PayrollDAO payrollDAO = new PayrollDAO();
+            List<Payroll> payrolls = payrollDAO.getPayrollByEmployee(empId);
+
+            javax.swing.table.DefaultTableModel mf = (javax.swing.table.DefaultTableModel) mainForm.getModel();
+            javax.swing.table.DefaultTableModel np = (javax.swing.table.DefaultTableModel) netPay.getModel();
+
+            // clear previous amounts
+            for (int r = 0; r < mf.getRowCount(); r++) {
+                mf.setValueAt("", r, 1);
+                mf.setValueAt("", r, 3);
+            }
+            np.setValueAt("", 0, 1);
+
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+
+            if (!payrolls.isEmpty()) {
+                Payroll p = payrolls.get(0); // latest
+
+                // display period as issued date (end of period)
+                if (p.getPeriodEnd() != null) {
+                    displayDate.setText(p.getPeriodEnd().format(dtf));
+                } else {
+                    displayDate.setText("[MM/DD/YY]");
+                }
+
+                // Fill mainForm table: rate, accrued (gross), gross, total deductions
+                mf.setValueAt(String.format("%,.2f", emp.getRatePerDay()), 0, 1); // Rate per Month (show rate per day)
+                mf.setValueAt(String.format("%,.2f", p.getGrossPay()), 1, 1); // Amount Accrued
+                mf.setValueAt(String.format("%,.2f", p.getGrossPay()), 5, 1); // Gross Pay row
+                mf.setValueAt(String.format("%,.2f", p.getTotalDeductions()), 5, 3); // Total Deductions amount
+
+                // Net pay table
+                np.setValueAt(String.format("%,.2f", p.getNetPay()), 0, 1);
+            } else {
+                // No payroll records yet: show current date and basic employee info
+                displayDate.setText(java.time.LocalDate.now().format(dtf));
+                // show rate per day
+                mf.setValueAt(String.format("%,.2f", emp.getRatePerDay()), 0, 1);
+                np.setValueAt("", 0, 1);
+            }
+
+        } catch (NumberFormatException ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Invalid Employee ID.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_employeeIDActionPerformed
 
     /**

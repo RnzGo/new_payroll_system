@@ -4,6 +4,9 @@
  */
 package gui;
 
+import payroll_system.dao.PayrollDAO;
+import payroll_system.model.Payroll;
+import java.util.List;
 /**
  *
  * @author Ong
@@ -17,6 +20,34 @@ public class PayrollPopup extends javax.swing.JFrame {
      */
     public PayrollPopup() {
         initComponents();
+        // load payroll data into the table
+        loadPayrolls();
+    }
+
+    private void loadPayrolls() {
+        try {
+            PayrollDAO dao = new PayrollDAO();
+            List<Payroll> list = dao.getAllPayrollRecords();
+            javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) jTable1.getModel();
+            model.setRowCount(0);
+            for (int i = 0; i < list.size(); i++) {
+                Payroll p = list.get(i);
+                Object[] row = new Object[] {
+                    i + 1,
+                    p.getEmpName(),
+                    p.getEmpPosition(),
+                    String.format("₱%,.2f", p.getGrossPay()),
+                    String.format("₱%,.2f", p.getGrossPay()),
+                    String.format("₱%,.2f", p.getTotalDeductions()),
+                    String.format("₱%,.2f", p.getNetPay()),
+                    "",
+                    ""
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            java.util.logging.Logger.getLogger(PayrollPopup.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
+        }
     }
 
     /**
@@ -368,7 +399,7 @@ public class PayrollPopup extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.dispose();        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
