@@ -23,16 +23,10 @@ public class PayrollService {
             int choice = getIntInput("Choose an option: ");
             
             switch (choice) {
-                case 1 -> addEmployee();
-                case 2 -> viewAllEmployees();
-                case 3 -> updateEmployee();
-                case 4 -> archiveEmployee();
-                case 5 -> viewArchivedEmployees();
-                case 6 -> recordAttendance();
-                case 7 -> viewEmployeeAttendance();
-                case 8 -> deleteAttendanceRecord();
-                case 9 -> computeSalary();
-                case 10 -> {
+                case 1 -> employeeManagement();
+                case 2 -> payrollManagement();
+                case 3 -> computeSalary();
+                case 4 -> {
                     System.out.println("Exiting Program...");
                     return;
                 }
@@ -42,21 +36,47 @@ public class PayrollService {
     }
     
     private void showMainMenu() {
-        System.out.println("\nPAYROLL SYSTEM");
-        System.out.println("1. Add Employee");
-        System.out.println("2. View All Employees");
-        System.out.println("3. Update Employee Information");
-        System.out.println("4. Archive Employee");
-        System.out.println("5. View Archive Employees");
-        System.out.println("6. Record Attendance");
-        System.out.println("7. View Employee Attendance");
-        System.out.println("8. Delete Attendance Record");
-        System.out.println("9. Compute Salary");
-        System.out.println("10. Exit");
+        System.out.println("\n=== PAYROLL MANAGEMENT SYSTEM ===");
+        System.out.println("1. Employee Management");
+        System.out.println("2. Payroll Management");
+        System.out.println("3. Compute Salary & Payslip");
+        System.out.println("4. Exit");
+        System.out.println("================================");
+    }
+    
+    // ========== EMPLOYEE MANAGEMENT GROUP ==========
+    private void employeeManagement() {
+        while (true) {
+            System.out.println("\n=== EMPLOYEE MANAGEMENT ===");
+            System.out.println("1. Add Employee");
+            System.out.println("2. View All Employees");
+            System.out.println("3. Update Employee Information");
+            System.out.println("4. Archive Employee");
+            System.out.println("5. View Archived Employees");
+            System.out.println("6. Record Attendance");
+            System.out.println("7. View Employee Attendance");
+            System.out.println("8. Delete Attendance Record");
+            System.out.println("0. Back to Main Menu");
+            
+            int choice = getIntInput("Choose an option: ");
+            
+            switch (choice) {
+                case 1 -> addEmployee();
+                case 2 -> viewAllEmployees();
+                case 3 -> updateEmployee();
+                case 4 -> archiveEmployee();
+                case 5 -> viewArchivedEmployees();
+                case 6 -> recordAttendance();
+                case 7 -> viewEmployeeAttendance();
+                case 8 -> deleteAttendanceRecord();
+                case 0 -> { return; }
+                default -> System.out.println("Invalid option");
+            }
+        }
     }
     
     private void addEmployee() {
-        System.out.println("\nAdd New Employee");
+        System.out.println("\n--- ADD NEW EMPLOYEE ---");
         
         System.out.print("Full Name: ");
         String name = scanner.nextLine();
@@ -85,7 +105,7 @@ public class PayrollService {
     }
     
     private void viewAllEmployees() {
-        System.out.println("\nAll Employees");
+        System.out.println("\n--- ALL EMPLOYEES ---");
         List<Employee> employees = employeeDAO.getAllEmployees();
         
         if (employees.isEmpty()) {
@@ -104,7 +124,7 @@ public class PayrollService {
     }
     
     private void updateEmployee() {
-        System.out.println("\nUpdate Employee Information");
+        System.out.println("\n--- UPDATE EMPLOYEE INFORMATION ---");
         viewAllEmployees();
         
         int empId = getIntInput("Enter Employee ID: ");
@@ -185,7 +205,7 @@ public class PayrollService {
     }
     
     private void archiveEmployee() {
-        System.out.println("Archive Employee");
+        System.out.println("\n--- ARCHIVE EMPLOYEE ---");
         List<Employee> activeEmployee = employeeDAO.getActiveEmployees();
         
         if (activeEmployee.isEmpty()) {
@@ -230,7 +250,7 @@ public class PayrollService {
     }
     
     private void viewArchivedEmployees() {
-        System.out.println("Archived Employees");
+        System.out.println("\n--- ARCHIVED EMPLOYEES ---");
         List<Employee> archivedEmployees = employeeDAO.getArchivedEmployees();
         
         if (archivedEmployees.isEmpty()) {
@@ -249,7 +269,7 @@ public class PayrollService {
     }
     
     private void recordAttendance() {
-        System.out.println("Record Attendance");
+        System.out.println("\n--- RECORD ATTENDANCE ---");
         List<Employee> activeEmployees = employeeDAO.getActiveEmployees();
         
         if (activeEmployees.isEmpty()) {
@@ -313,7 +333,7 @@ public class PayrollService {
     }
     
     private void viewEmployeeAttendance() {
-        System.out.println("View Employee Attendance");
+        System.out.println("\n--- VIEW EMPLOYEE ATTENDANCE ---");
         int empId = getIntInput("Enter Employee ID: ");
         Employee employee = employeeDAO.getEmployeeById(empId);
         
@@ -340,7 +360,7 @@ public class PayrollService {
     }
     
     private void deleteAttendanceRecord() {
-        System.out.println("Delete Attendance Record");
+        System.out.println("\n--- DELETE ATTENDANCE RECORD ---");
         AttendanceDAO attendanceDAO = new AttendanceDAO();
         
         int empId = getIntInput("Enter Employee ID to view attendance records: ");
@@ -401,8 +421,79 @@ public class PayrollService {
         }
     }
     
+    // ========== PAYROLL MANAGEMENT GROUP ==========
+    private void payrollManagement() {
+        while (true) {
+            System.out.println("\n=== PAYROLL MANAGEMENT ===");
+            System.out.println("1. View All Payroll Records");
+            System.out.println("2. View Payroll by Period");
+            System.out.println("0. Back to Main Menu");
+            
+            int choice = getIntInput("Choose an option: ");
+            
+            switch (choice) {
+                case 1 -> viewAllPayroll();
+                case 2 -> viewPayrollByPeriod();
+                case 0 -> { return; }
+                default -> System.out.println("Invalid option");
+            }
+        }
+    }
+    
+    private void viewAllPayroll() {
+        System.out.println("\n--- ALL PAYROLL RECORDS ---");
+        PayrollDAO payrollDAO = new PayrollDAO();
+        payrollDAO.viewAllPayrollWithDetails();
+        
+        System.out.print("Press Enter to continue...");
+        scanner.nextLine();
+    }
+    
+    private void viewPayrollByPeriod() {
+        System.out.println("\n--- PAYROLL BY PERIOD ---");
+        
+        // Get available periods
+        PayrollPeriodDAO periodDAO = new PayrollPeriodDAO();
+        List<String[]> periods = periodDAO.getAllPayrollPeriods();
+        
+        if (periods.isEmpty()) {
+            System.out.println("No payroll periods found!");
+            return;
+        }
+        
+        System.out.println("Available Periods:");
+        System.out.println("ID | Period Start | Period End | Date Issued");
+        System.out.println("---------------------------------------------");
+        
+        for (String[] period : periods) {
+            System.out.printf("%s | %s | %s | %s\n",
+                period[0], period[1], period[2], period[3]);
+        }
+        
+        int periodId = getIntInput("Enter Period ID: ");
+        
+        PayrollDAO payrollDAO = new PayrollDAO();
+        List<Payroll> payrollList = payrollDAO.getPayrollByPeriod(periodId);
+        
+        if (payrollList.isEmpty()) {
+            System.out.println("No payroll records found for this period!");
+            return;
+        }
+        
+        System.out.println("\nPayroll for Period ID: " + periodId);
+        System.out.println("ID | Employee Name | Position | Gross Pay | Deductions | Net Pay");
+        System.out.println("----------------------------------------------------------------");
+        
+        for (Payroll payroll : payrollList) {
+            System.out.printf("%d | %s | %s | ₱%.2f | ₱%.2f | ₱%.2f\n",
+                payroll.getPayrollId(), payroll.getEmpName(), payroll.getEmpPosition(),
+                payroll.getGrossPay(), payroll.getTotalDeductions(), payroll.getNetPay());
+        }
+    }
+    
+    // ========== SALARY COMPUTATION & PAYSLIP GROUP ==========
     private void computeSalary() {
-        System.out.println("Compute Salary");
+        System.out.println("\n=== COMPUTE SALARY & GENERATE PAYSLIP ===");
         
         try {
             List<Employee> employees = employeeDAO.getActiveEmployees();
@@ -485,7 +576,7 @@ public class PayrollService {
     
     private void saveToPayroll(SalaryComputation computation) {
         try {
-            System.out.println("Save to Payroll");
+            System.out.println("\n--- SAVING TO PAYROLL ---");
             AttendanceDAO attendanceDAO = new AttendanceDAO();
             
             LocalDate periodStart = LocalDate.now().minusDays(14);
@@ -537,15 +628,7 @@ public class PayrollService {
         }
     }
     
-    private void viewAllPayroll() {
-        System.out.println("View All Payroll Records");
-        PayrollDAO payrollDAO = new PayrollDAO();
-        payrollDAO.viewAllPayrollWithDetails();
-        
-        System.out.print("Press Enter to continue...");
-        scanner.nextLine();
-    }
-    
+    // ========== UTILITY METHODS ==========
     private int getIntInput(String prompt) {
         System.out.print(prompt);
         while (!scanner.hasNextInt()) {

@@ -208,7 +208,7 @@ public class PayrollDAO {
     }
     
     // GET PAYROLL BY ID
-    public Payroll getPayrollById(int payrollId) {
+    public Payroll getPayrollByPeriodId(int payrollId) {
         String sql = "SELECT p.*, e.emp_name, e.emp_position, pp.period_start, pp.period_end " + 
                      "FROM payroll p " + 
                      "JOIN employees e ON p.emp_id = e.emp_id " + 

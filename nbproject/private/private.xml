@@ -18,7 +18,7 @@
             <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/model/PayslipData.java</file>
             <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/model/EmployeeDeduction.java</file>
             <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/dao/EmployeeDeductionDAO.java</file>
-            <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/service/PayrollComputationService.java</file>
+            <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/service/SalaryComputationService.java</file>
             <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/model/SalaryComputation.java</file>
             <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/payroll_system/service/SalaryComputationPrinter.java</file>
             <file>file:/C:/Users/Smile/OneDrive/Documents/NetBeansProjects/Payroll_System/src/PayrollSystem.java</file>
