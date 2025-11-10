@@ -29,76 +29,76 @@ public class PayrollPopup extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        lblSystemLogo = new javax.swing.JLabel();
+        pnlTitle = new javax.swing.JPanel();
+        lblTitleTop = new javax.swing.JLabel();
+        lblTitleMid = new javax.swing.JLabel();
+        lblTitleBot = new javax.swing.JLabel();
+        pnlPayrollTitle = new javax.swing.JPanel();
+        lblPayrollTitle = new javax.swing.JLabel();
+        lblPayPeriod = new javax.swing.JLabel();
+        lblPayrollDesc1 = new javax.swing.JLabel();
+        lblPayrollDesc2 = new javax.swing.JLabel();
+        pnlPayrollTable = new javax.swing.JPanel();
+        scrpanePayrollTable = new javax.swing.JScrollPane();
+        tblPayrollTable = new javax.swing.JTable();
+        pnlFooter = new javax.swing.JPanel();
+        pnlFooterLeft = new javax.swing.JPanel();
+        lblFooterL1 = new javax.swing.JLabel();
+        lblFooterL2 = new javax.swing.JLabel();
+        lblFooterL3 = new javax.swing.JLabel();
+        lblFooterL4 = new javax.swing.JLabel();
+        lblFooterLTreasurer = new javax.swing.JLabel();
+        lblFooterLPnngBrgy = new javax.swing.JLabel();
+        pnlFooterRight = new javax.swing.JPanel();
+        lblFooterR1 = new javax.swing.JLabel();
+        lblFooterR2 = new javax.swing.JLabel();
+        lblFooterR3 = new javax.swing.JLabel();
+        lblFooterR4 = new javax.swing.JLabel();
+        lblFooterRTreasurer = new javax.swing.JLabel();
+        btnPayrollBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Payroll");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("System Logo");
+        lblSystemLogo.setText("System Logo");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 32)); // NOI18N
-        jLabel2.setText("Republic of the Philippines");
+        lblTitleTop.setFont(new java.awt.Font("Tahoma", 1, 32)); // NOI18N
+        lblTitleTop.setText("Republic of the Philippines");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 32)); // NOI18N
-        jLabel3.setText("Barangay San Roque");
+        lblTitleMid.setFont(new java.awt.Font("Tahoma", 1, 32)); // NOI18N
+        lblTitleMid.setText("Barangay San Roque");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel4.setText("Cainta, Rizal");
+        lblTitleBot.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblTitleBot.setText("Cainta, Rizal");
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlTitleLayout = new javax.swing.GroupLayout(pnlTitle);
+        pnlTitle.setLayout(pnlTitleLayout);
+        pnlTitleLayout.setHorizontalGroup(
+            pnlTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTitleLayout.createSequentialGroup()
+                .addGroup(pnlTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlTitleLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(lblTitleTop))
+                    .addGroup(pnlTitleLayout.createSequentialGroup()
                         .addGap(42, 42, 42)
-                        .addComponent(jLabel3))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(lblTitleMid))
+                    .addGroup(pnlTitleLayout.createSequentialGroup()
                         .addGap(138, 138, 138)
-                        .addComponent(jLabel4)))
+                        .addComponent(lblTitleBot)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
+        pnlTitleLayout.setVerticalGroup(
+            pnlTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTitleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addComponent(lblTitleTop)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
+                .addComponent(lblTitleMid)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
+                .addComponent(lblTitleBot)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -108,72 +108,72 @@ public class PayrollPopup extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(351, 351, 351)
-                .addComponent(jLabel1)
+                .addComponent(lblSystemLogo)
                 .addGap(116, 116, 116)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(553, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(lblSystemLogo)
                 .addGap(57, 57, 57))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1530, 130));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 32)); // NOI18N
-        jLabel5.setText("Employee Payroll");
+        lblPayrollTitle.setFont(new java.awt.Font("Tahoma", 1, 32)); // NOI18N
+        lblPayrollTitle.setText("Employee Payroll");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        jLabel6.setText("PAY PERIOD: [MM,DD,YY] - [MM,DD,YY]");
+        lblPayPeriod.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        lblPayPeriod.setText("PAY PERIOD: [MM,DD,YY] - [MM,DD,YY]");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel7.setText("We hereby acknowledge to have received from (Brgy. Treasurer), Treasurer of Barangay Government of San Roque, Cainta, Rizal, the sums herein specified opposite or names, ");
+        lblPayrollDesc1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblPayrollDesc1.setText("We hereby acknowledge to have received from (Brgy. Treasurer), Treasurer of Barangay Government of San Roque, Cainta, Rizal, the sums herein specified opposite or names, ");
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel14.setText("respective the same being fit compensation for officials benefit - medical benifit to the correctness of which we severally certify.");
+        lblPayrollDesc2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblPayrollDesc2.setText("respective the same being fit compensation for officials benefit - medical benifit to the correctness of which we severally certify.");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlPayrollTitleLayout = new javax.swing.GroupLayout(pnlPayrollTitle);
+        pnlPayrollTitle.setLayout(pnlPayrollTitleLayout);
+        pnlPayrollTitleLayout.setHorizontalGroup(
+            pnlPayrollTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlPayrollTitleLayout.createSequentialGroup()
+                .addGroup(pnlPayrollTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlPayrollTitleLayout.createSequentialGroup()
                         .addGap(196, 196, 196)
-                        .addComponent(jLabel7))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblPayrollDesc1))
+                    .addGroup(pnlPayrollTitleLayout.createSequentialGroup()
                         .addGap(318, 318, 318)
-                        .addComponent(jLabel14))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblPayrollDesc2))
+                    .addGroup(pnlPayrollTitleLayout.createSequentialGroup()
                         .addGap(503, 503, 503)
-                        .addComponent(jLabel5))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblPayrollTitle))
+                    .addGroup(pnlPayrollTitleLayout.createSequentialGroup()
                         .addGap(466, 466, 466)
-                        .addComponent(jLabel6)))
+                        .addComponent(lblPayPeriod)))
                 .addContainerGap(285, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        pnlPayrollTitleLayout.setVerticalGroup(
+            pnlPayrollTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlPayrollTitleLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
+                .addComponent(lblPayrollTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
+                .addComponent(lblPayPeriod)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
+                .addComponent(lblPayrollDesc1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel14)
+                .addComponent(lblPayrollDesc2)
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 1530, 120));
+        getContentPane().add(pnlPayrollTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 1530, 120));
 
-        jTable1.setForeground(new java.awt.Color(36, 36, 36));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblPayrollTable.setForeground(new java.awt.Color(36, 36, 36));
+        tblPayrollTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
@@ -185,191 +185,191 @@ public class PayrollPopup extends javax.swing.JFrame {
                 "No.", "Name of Employees", "Position", "Rate per Month (PHP)", "Amount Accrued for the Period", "Deductions", "Amount Due (PHP)", "Amount Paid in Cash", "Signature of Payee"
             }
         ));
-        jTable1.setRowHeight(45);
-        jTable1.setShowGrid(false);
-        jScrollPane1.setViewportView(jTable1);
+        tblPayrollTable.setRowHeight(45);
+        tblPayrollTable.setShowGrid(false);
+        scrpanePayrollTable.setViewportView(tblPayrollTable);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlPayrollTableLayout = new javax.swing.GroupLayout(pnlPayrollTable);
+        pnlPayrollTable.setLayout(pnlPayrollTableLayout);
+        pnlPayrollTableLayout.setHorizontalGroup(
+            pnlPayrollTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlPayrollTableLayout.createSequentialGroup()
                 .addGap(74, 74, 74)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scrpanePayrollTable, javax.swing.GroupLayout.PREFERRED_SIZE, 1370, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(86, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        pnlPayrollTableLayout.setVerticalGroup(
+            pnlPayrollTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlPayrollTableLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scrpanePayrollTable, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 1530, 270));
+        getContentPane().add(pnlPayrollTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 1530, 270));
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setText("I HEREBY CERTIFY on my official oath that the");
+        lblFooterL1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblFooterL1.setText("I HEREBY CERTIFY on my official oath that the");
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel16.setText("from the appropriation indicated.");
+        lblFooterL2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblFooterL2.setText("above PAYROLL is correct and hereby approved");
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel15.setText("above PAYROLL is correct and hereby approved");
+        lblFooterL3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblFooterL3.setText("from the appropriation indicated.");
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel9.setText("APPROVED:");
+        lblFooterL4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblFooterL4.setText("APPROVED:");
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel10.setText("Brgy. Treasurer");
+        lblFooterLTreasurer.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblFooterLTreasurer.setText("Brgy. Treasurer");
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel11.setText("Punong Barangay");
+        lblFooterLPnngBrgy.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblFooterLPnngBrgy.setText("Punong Barangay");
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlFooterLeftLayout = new javax.swing.GroupLayout(pnlFooterLeft);
+        pnlFooterLeft.setLayout(pnlFooterLeftLayout);
+        pnlFooterLeftLayout.setHorizontalGroup(
+            pnlFooterLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlFooterLeftLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jLabel10)
+                .addComponent(lblFooterLTreasurer)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel11)
+                .addComponent(lblFooterLPnngBrgy)
                 .addGap(32, 32, 32))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFooterLeftLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel16)
+                .addComponent(lblFooterL3)
                 .addGap(126, 126, 126))
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+            .addGroup(pnlFooterLeftLayout.createSequentialGroup()
+                .addGroup(pnlFooterLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlFooterLeftLayout.createSequentialGroup()
                         .addGap(79, 79, 79)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel8)))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(pnlFooterLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblFooterL2)
+                            .addComponent(lblFooterL1)))
+                    .addGroup(pnlFooterLeftLayout.createSequentialGroup()
                         .addGap(192, 192, 192)
-                        .addComponent(jLabel9)))
+                        .addComponent(lblFooterL4)))
                 .addContainerGap(90, Short.MAX_VALUE))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        pnlFooterLeftLayout.setVerticalGroup(
+            pnlFooterLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlFooterLeftLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblFooterL1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel15)
+                .addComponent(lblFooterL2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel16)
+                .addComponent(lblFooterL3)
                 .addGap(12, 12, 12)
-                .addComponent(jLabel9)
+                .addComponent(lblFooterL4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel10))
+                .addGroup(pnlFooterLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblFooterLPnngBrgy)
+                    .addComponent(lblFooterLTreasurer))
                 .addContainerGap())
         );
 
-        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel17.setText("I HEREBY CERTIFY on my official oath that each employee whose name appears on the above");
+        lblFooterR1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblFooterR1.setText("I HEREBY CERTIFY on my official oath that each employee whose name appears on the above");
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel12.setText("payroll have been paid in cash or check, and in no other mode, the amount shown under column");
+        lblFooterR2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblFooterR2.setText("payroll have been paid in cash or check, and in no other mode, the amount shown under column");
 
-        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel18.setText("“Amount Due” above opposite his/her name. The total of the payments made by means of this");
+        lblFooterR3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblFooterR3.setText("“Amount Due” above opposite his/her name. The total of the payments made by means of this");
 
-        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel19.setText("payroll amount (Amount)");
+        lblFooterR4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblFooterR4.setText("payroll amount (Amount)");
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel13.setText("Barangay Treasurer");
+        lblFooterRTreasurer.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblFooterRTreasurer.setText("Barangay Treasurer");
 
-        jButton1.setBackground(new java.awt.Color(11, 11, 69));
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("BACK");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnPayrollBack.setBackground(new java.awt.Color(11, 11, 69));
+        btnPayrollBack.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnPayrollBack.setForeground(new java.awt.Color(255, 255, 255));
+        btnPayrollBack.setText("BACK");
+        btnPayrollBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnPayrollBackActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlFooterRightLayout = new javax.swing.GroupLayout(pnlFooterRight);
+        pnlFooterRight.setLayout(pnlFooterRightLayout);
+        pnlFooterRightLayout.setHorizontalGroup(
+            pnlFooterRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlFooterRightLayout.createSequentialGroup()
                 .addGap(77, 77, 77)
-                .addComponent(jLabel13)
+                .addComponent(lblFooterRTreasurer)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnPayrollBack, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel6Layout.createSequentialGroup()
+            .addGroup(pnlFooterRightLayout.createSequentialGroup()
+                .addGroup(pnlFooterRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlFooterRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(pnlFooterRightLayout.createSequentialGroup()
                             .addGap(26, 26, 26)
-                            .addComponent(jLabel17))
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
+                            .addComponent(lblFooterR1))
+                        .addGroup(pnlFooterRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlFooterRightLayout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(jLabel18))
-                            .addComponent(jLabel12)))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(lblFooterR3))
+                            .addComponent(lblFooterR2)))
+                    .addGroup(pnlFooterRightLayout.createSequentialGroup()
                         .addGap(226, 226, 226)
-                        .addComponent(jLabel19)))
+                        .addComponent(lblFooterR4)))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        pnlFooterRightLayout.setVerticalGroup(
+            pnlFooterRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlFooterRightLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(jLabel17)
+                .addComponent(lblFooterR1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel12)
+                .addComponent(lblFooterR2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel18)
+                .addComponent(lblFooterR3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel19)
+                .addGroup(pnlFooterRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlFooterRightLayout.createSequentialGroup()
+                        .addComponent(lblFooterR4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel13))
+                        .addComponent(btnPayrollBack, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblFooterRTreasurer))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlFooterLayout = new javax.swing.GroupLayout(pnlFooter);
+        pnlFooter.setLayout(pnlFooterLayout);
+        pnlFooterLayout.setHorizontalGroup(
+            pnlFooterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlFooterLayout.createSequentialGroup()
                 .addGap(76, 76, 76)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlFooterLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 304, Short.MAX_VALUE)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlFooterRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(88, 88, 88))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        pnlFooterLayout.setVerticalGroup(
+            pnlFooterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlFooterLayout.createSequentialGroup()
+                .addComponent(pnlFooterLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel4Layout.createSequentialGroup()
+            .addGroup(pnlFooterLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlFooterRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(77, 77, 77))
         );
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 550, 1530, 180));
+        getContentPane().add(pnlFooter, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 550, 1530, 180));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnPayrollBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayrollBackActionPerformed
         this.dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnPayrollBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -397,34 +397,34 @@ public class PayrollPopup extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JButton btnPayrollBack;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblFooterL1;
+    private javax.swing.JLabel lblFooterL2;
+    private javax.swing.JLabel lblFooterL3;
+    private javax.swing.JLabel lblFooterL4;
+    private javax.swing.JLabel lblFooterLPnngBrgy;
+    private javax.swing.JLabel lblFooterLTreasurer;
+    private javax.swing.JLabel lblFooterR1;
+    private javax.swing.JLabel lblFooterR2;
+    private javax.swing.JLabel lblFooterR3;
+    private javax.swing.JLabel lblFooterR4;
+    private javax.swing.JLabel lblFooterRTreasurer;
+    private javax.swing.JLabel lblPayPeriod;
+    private javax.swing.JLabel lblPayrollDesc1;
+    private javax.swing.JLabel lblPayrollDesc2;
+    private javax.swing.JLabel lblPayrollTitle;
+    private javax.swing.JLabel lblSystemLogo;
+    private javax.swing.JLabel lblTitleBot;
+    private javax.swing.JLabel lblTitleMid;
+    private javax.swing.JLabel lblTitleTop;
+    private javax.swing.JPanel pnlFooter;
+    private javax.swing.JPanel pnlFooterLeft;
+    private javax.swing.JPanel pnlFooterRight;
+    private javax.swing.JPanel pnlPayrollTable;
+    private javax.swing.JPanel pnlPayrollTitle;
+    private javax.swing.JPanel pnlTitle;
+    private javax.swing.JScrollPane scrpanePayrollTable;
+    private javax.swing.JTable tblPayrollTable;
     // End of variables declaration//GEN-END:variables
 }
