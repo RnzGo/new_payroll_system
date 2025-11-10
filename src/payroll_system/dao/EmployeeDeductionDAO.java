@@ -1,3 +1,4 @@
+/*
 package payroll_system.dao;
 
 import payroll_system.model.EmployeeDeduction;
@@ -183,3 +184,4 @@ public class EmployeeDeductionDAO {
         return false;
     }
 }
+*/

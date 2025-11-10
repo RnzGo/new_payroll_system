@@ -492,97 +492,124 @@ public class PayrollService {
     }
     
     // ========== SALARY COMPUTATION & PAYSLIP GROUP ==========
+   
     private void computeSalary() {
-        System.out.println("\n=== COMPUTE SALARY & GENERATE PAYSLIP ===");
+    System.out.println("\n=== COMPUTE SALARY & GENERATE PAYSLIP ===");
+    
+    try {
+        List<Employee> employees = employeeDAO.getActiveEmployees();
+        System.out.println("Active Employees:");
+        System.out.println("ID\tName\t\tPosition");
+        System.out.println("----------------------------------------");
+        for (Employee emp : employees) {
+            System.out.printf("%d\t%-15s\t%-10s\n", 
+                emp.getEmpId(), emp.getEmpName(), emp.getEmpPosition());
+        }
         
-        try {
-            List<Employee> employees = employeeDAO.getActiveEmployees();
-            System.out.println("Active Employees:");
-            System.out.println("ID\tName\t\tPosition");
-            System.out.println("----------------------------------------");
-            for (Employee emp : employees) {
-                System.out.printf("%d\t%-15s\t%-10s\n", 
-                    emp.getEmpId(), emp.getEmpName(), emp.getEmpPosition());
-            }
+        int empId = getIntInput("Enter Employee ID: ");
+        Employee employee = employeeDAO.getEmployeeById(empId);
+        
+        if (employee == null) {
+            System.out.println("Employee not found!");
+            return;
+        }
+        
+        // Get period information from user
+        System.out.println("\n--- PAYROLL PERIOD INFORMATION ---");
+        System.out.print("Enter Period Start (YYYY-MM-DD): ");
+        String startStr = scanner.nextLine();
+        LocalDate periodStart = LocalDate.parse(startStr);
+        
+        System.out.print("Enter Period End (YYYY-MM-DD): ");
+        String endStr = scanner.nextLine();
+        LocalDate periodEnd = LocalDate.parse(endStr);
+        
+        if (periodEnd.isBefore(periodStart)) {
+            System.out.println("Invalid input! End date must be after start date!");
+            return;
+        }
+        
+        double daysWorked = getDoubleInput("Enter Number of Days Worked: ");
+        
+        if (daysWorked <= 0) {
+            System.out.println("Days worked must be greater than 0!");
+            return;
+        }
+        
+        // Display period information
+        System.out.println("\nPeriod: " + periodStart + " to " + periodEnd);
+        
+        double grossSalary = employee.getRatePerDay() * daysWorked;
+        System.out.println("Gross Salary Calculation:");
+        System.out.printf("Rate per Day: ₱%,.2f × Days Worked: %.1f = Gross Salary: ₱%,.2f\n", 
+            employee.getRatePerDay(), daysWorked, grossSalary);
+        
+        SalaryComputationService computationService = new SalaryComputationService();
+        SalaryComputation computation = computationService.computeSalaryWithManualDeductions(empId, daysWorked);
+        
+        if (computation != null) {
+            SalaryComputationPrinter printer = new SalaryComputationPrinter();
+            printer.printSalaryComputation(computation);
             
-            int empId = getIntInput("Enter Employee ID: ");
-            Employee employee = employeeDAO.getEmployeeById(empId);
+            System.out.print("Save this computation to payroll? (y/n): ");
+            String save = scanner.nextLine();
             
-            if (employee == null) {
-                System.out.println("Employee not found!");
-                return;
-            }
-            
-            double daysWorked = getDoubleInput("Enter Number of Days Worked: ");
-            
-            if (daysWorked <= 0) {
-                System.out.println("Days worked must be greater than 0!");
-                return;
-            }
-            
-            double grossSalary = employee.getRatePerDay() * daysWorked;
-            System.out.println("Gross Salary Calculation:");
-            System.out.printf("Rate per Day: ₱%,.2f × Days Worked: %.1f = Gross Salary: ₱%,.2f\n", 
-                employee.getRatePerDay(), daysWorked, grossSalary);
-            
-            SalaryComputationService computationService = new SalaryComputationService();
-            SalaryComputation computation = computationService.computeSalaryWithManualDeductions(empId, daysWorked);
-            
-            if (computation != null) {
-                SalaryComputationPrinter printer = new SalaryComputationPrinter();
-                printer.printSalaryComputation(computation);
+            if (save.equalsIgnoreCase("y")) {
+                saveToPayroll(computation, periodStart, periodEnd);
                 
-                System.out.print("Save this computation to payroll? (y/n): ");
-                String save = scanner.nextLine();
-                
-                if (save.equalsIgnoreCase("y")) {
-                    saveToPayroll(computation);
-                    
-                    System.out.print("Would you like to view all payroll records? (y/n): ");
-                    String view = scanner.nextLine();
-                    if (view.equalsIgnoreCase("y")) {
-                        viewAllPayroll();
-                    }
+                System.out.print("Would you like to view all payroll records? (y/n): ");
+                String view = scanner.nextLine();
+                if (view.equalsIgnoreCase("y")) {
+                    viewAllPayroll();
                 }
-            } else {
-                System.out.println("Failed to compute salary!");
             }
-            
-            System.out.print("Press Enter to continue...");
-            scanner.nextLine();
-            
-        } catch (Exception e) {
-            System.err.println("Error computing salary: " + e.getMessage());
-            e.printStackTrace();
+        } else {
+            System.out.println("Failed to compute salary!");
         }
-    }
-    
-    private int getOrCreatePayrollPeriod() {
-        PayrollPeriodDAO periodDAO = new PayrollPeriodDAO();
         
-        try {
-            LocalDate periodStart = LocalDate.now().minusDays(14);
-            LocalDate periodEnd = LocalDate.now();
-            
-            int periodId = periodDAO.getOrCreatePayrollPeriod(periodStart, periodEnd);
-            return periodId;
-            
-        } catch (Exception e) {
-            System.err.println("Error creating payroll period: " + e.getMessage());
-            e.printStackTrace();
-            return -1;
-        }
+        System.out.print("Press Enter to continue...");
+        scanner.nextLine();
+        
+    } catch (Exception e) {
+        System.err.println("Error computing salary: " + e.getMessage());
+        e.printStackTrace();
     }
+}
     
-    private void saveToPayroll(SalaryComputation computation) {
-        try {
-            System.out.println("\n--- SAVING TO PAYROLL ---");
-            AttendanceDAO attendanceDAO = new AttendanceDAO();
-            
-            LocalDate periodStart = LocalDate.now().minusDays(14);
-            LocalDate periodEnd = LocalDate.now();
-            
-            int daysWorkedId = attendanceDAO.recordAttendance(
+    private int getOrCreatePayrollPeriod(LocalDate periodStart, LocalDate periodEnd) {
+    PayrollPeriodDAO periodDAO = new PayrollPeriodDAO();
+    
+    try {
+        // Use the provided period dates instead of auto-generating
+        int periodId = periodDAO.getOrCreatePayrollPeriod(periodStart, periodEnd);
+        return periodId;
+        
+    } catch (Exception e) {
+        System.err.println("Error creating payroll period: " + e.getMessage());
+        e.printStackTrace();
+        return -1;
+    }
+}
+    
+    private void saveToPayroll(SalaryComputation computation, LocalDate periodStart, LocalDate periodEnd) {
+    try {
+        System.out.println("\n--- SAVING TO PAYROLL ---");
+        
+        AttendanceDAO attendanceDAO = new AttendanceDAO();
+        int daysWorkedId;
+        
+        // Check if attendance record already exists for this period
+        List<Attendance> existingAttendance = attendanceDAO.getAttendanceByEmployeeIdAndPeriod(
+            computation.getEmployee().getEmpId(), periodStart, periodEnd);
+        
+        if (!existingAttendance.isEmpty()) {
+            // Use existing attendance record
+            daysWorkedId = existingAttendance.get(0).getDaysWorkedId();
+            System.out.println("Using existing attendance record for this period.");
+        } else {
+            // Create attendance record automatically for payroll
+            System.out.println("Creating attendance record for payroll...");
+            daysWorkedId = attendanceDAO.recordAttendance(
                 computation.getEmployee().getEmpId(),
                 computation.getDaysWorked(),
                 periodStart,
@@ -593,40 +620,54 @@ public class PayrollService {
                 System.out.println("Failed to create attendance record!");
                 return;
             }
-            
-            int periodId = getOrCreatePayrollPeriod();
-            
-            if (periodId == -1) {
-                System.out.println("Failed to get payroll period!");
+            System.out.println("Attendance record created successfully.");
+        }
+        
+        // Use the user-provided period to create/get payroll period
+        int periodId = getOrCreatePayrollPeriod(periodStart, periodEnd);
+        
+        if (periodId == -1) {
+            System.out.println("Failed to get payroll period!");
+            return;
+        }
+        
+        // Check if payroll already exists for this employee and period
+        PayrollDAO payrollDAO = new PayrollDAO();
+        if (payrollDAO.payrollExists(computation.getEmployee().getEmpId(), periodId)) {
+            System.out.println("Payroll already exists for this employee and period!");
+            System.out.print("Do you want to overwrite it? (y/n): ");
+            String overwrite = scanner.nextLine();
+            if (!overwrite.equalsIgnoreCase("y")) {
+                System.out.println("Payroll save cancelled.");
                 return;
             }
-            
-            PayrollDAO payrollDAO = new PayrollDAO();
-            Payroll payroll = new Payroll();
-            payroll.setEmpId(computation.getEmployee().getEmpId());
-            payroll.setPeriodId(periodId);
-            payroll.setDaysWorkedId(daysWorkedId);
-            payroll.setGrossPay(computation.getGrossSalary());
-            payroll.setTotalDeductions(computation.getTotalDeductions());
-            payroll.setNetPay(computation.getNetPay());
-            
-            boolean payrollSuccess = payrollDAO.generatePayroll(payroll);
-            
-            if (payrollSuccess) {
-                System.out.println("Payroll saved successfully!");
-                System.out.printf("Employee: %s\n", computation.getEmployee().getEmpName());
-                System.out.printf("Gross Pay: ₱%,.2f\n", computation.getGrossSalary());
-                System.out.printf("Net Pay: ₱%,.2f\n", computation.getNetPay());
-                System.out.printf("Days Worked ID: %d\n", daysWorkedId);
-            } else {
-                System.out.println("Failed to save payroll record!");
-            }
-            
-        } catch (Exception e) {
-            System.err.println("Error saving to payroll: " + e.getMessage());
-            e.printStackTrace();
         }
+        
+        Payroll payroll = new Payroll();
+        payroll.setEmpId(computation.getEmployee().getEmpId());
+        payroll.setPeriodId(periodId);
+        payroll.setDaysWorkedId(daysWorkedId);
+        payroll.setGrossPay(computation.getGrossSalary());
+        payroll.setTotalDeductions(computation.getTotalDeductions());
+        payroll.setNetPay(computation.getNetPay());
+        
+        boolean payrollSuccess = payrollDAO.generatePayroll(payroll);
+        
+        if (payrollSuccess) {
+            System.out.println("Payroll saved successfully!");
+            System.out.printf("Employee: %s\n", computation.getEmployee().getEmpName());
+            System.out.printf("Period: %s to %s\n", periodStart, periodEnd);
+            System.out.printf("Gross Pay: ₱%,.2f\n", computation.getGrossSalary());
+            System.out.printf("Net Pay: ₱%,.2f\n", computation.getNetPay());
+        } else {
+            System.out.println("Failed to save payroll record!");
+        }
+        
+    } catch (Exception e) {
+        System.err.println("Error saving to payroll: " + e.getMessage());
+        e.printStackTrace();
     }
+}
     
     // ========== UTILITY METHODS ==========
     private int getIntInput(String prompt) {

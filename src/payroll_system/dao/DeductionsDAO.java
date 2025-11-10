@@ -1,4 +1,4 @@
-
+/*
 package payroll_system.dao;
 import payroll_system.model.Deductions;
 import payroll_system.util.DatabaseConnection;
@@ -145,3 +145,4 @@ public class DeductionsDAO {
         return null;
     }
 }
+*/
