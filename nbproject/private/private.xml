@@ -5,7 +5,8 @@
         <group>
             <file>file:/C:/Users/Giahn/new_payroll_system/src/gui/MainFrame.java</file>
             <file>file:/C:/Users/Giahn/new_payroll_system/src/gui/PayslipPopup.java</file>
-            <file>file:/C:/Users/Giahn/new_payroll_system/src/payroll_system/service/PayrollService.java</file>
+            <file>file:/C:/Users/Giahn/new_payroll_system/src/gui/PayrollPopup.java</file>
+            <file>file:/C:/Users/Giahn/new_payroll_system/src/gui/PeriodSelectionPopUp.java</file>
         </group>
     </open-files>
 </project-private>

@@ -6,6 +6,8 @@ package gui;
 
 import payroll_system.dao.EmployeeDAO;
 import payroll_system.dao.PayrollDAO;
+import payroll_system.dao.EmployeeDeductionDAO;
+import payroll_system.model.EmployeeDeduction;
 import payroll_system.model.Employee;
 import payroll_system.model.Payroll;
 import java.time.format.DateTimeFormatter;
@@ -18,6 +20,9 @@ import java.util.List;
 public class PayslipPopup extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PayslipPopup.class.getName());
+    // when a period is selected via the PeriodSelectionPopUp, store its id here
+    private Integer selectedPeriodId = null;
+    private boolean periodChosen = false;
 
     /**
      * Creates new form PayslipPopup
@@ -57,6 +62,7 @@ public class PayslipPopup extends javax.swing.JFrame {
         mainFormScrollPane = new javax.swing.JScrollPane();
         mainForm = new javax.swing.JTable();
         Back = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Payslip");
@@ -245,10 +251,10 @@ public class PayslipPopup extends javax.swing.JFrame {
             FormsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FormsLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(mainFormScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(mainFormScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(netPayScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         getContentPane().add(Forms, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 700, 340));
@@ -258,18 +264,30 @@ public class PayslipPopup extends javax.swing.JFrame {
         Back.setForeground(new java.awt.Color(255, 255, 255));
         Back.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Back.setLabel("BACK");
+        Back.setPreferredSize(new java.awt.Dimension(148, 33));
         Back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BackActionPerformed(evt);
             }
         });
-        getContentPane().add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 570, 120, 28));
+        getContentPane().add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 570, -1, -1));
+
+        jButton3.setBackground(new java.awt.Color(11, 11, 69));
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 21)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Select Period");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 570, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
-        this.dispose();        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_BackActionPerformed
 
     private void employeeIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeIDActionPerformed
@@ -323,7 +341,73 @@ public class PayslipPopup extends javax.swing.JFrame {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
             if (!payrolls.isEmpty()) {
-                Payroll p = payrolls.get(0); // latest
+                // If the pay period fields are filled, try to find the payroll that matches the entered period
+                Payroll selectedPayroll = null;
+                String p1 = firstDate.getText().trim();
+                // If user left default placeholder or empty, ignore and use latest
+                boolean periodEntered = !p1.isEmpty() && !p1.startsWith("[");
+
+                DateTimeFormatter[] tryFormats = new DateTimeFormatter[] {
+                    DateTimeFormatter.ofPattern("MM/dd/yyyy"),
+                    DateTimeFormatter.ofPattern("MM-dd-yyyy"),
+                    DateTimeFormatter.ofPattern("MM/dd/yy"),
+                    DateTimeFormatter.ofPattern("MM-dd-yy")
+                };
+
+                java.time.LocalDate parsedStart = null;
+                if (periodEntered) {
+                    // try parsing the entered start date with multiple formats
+                    for (DateTimeFormatter fmt : tryFormats) {
+                        try {
+                            parsedStart = java.time.LocalDate.parse(p1, fmt);
+                            break;
+                        } catch (Exception ex) {
+                            // ignore and try next
+                        }
+                    }
+                }
+
+                if (parsedStart != null) {
+                    // find payroll with matching period start (or same month/year)
+                    for (Payroll pr : payrolls) {
+                        if (pr.getPeriodStart() != null) {
+                            if (pr.getPeriodStart().equals(parsedStart) ||
+                                (pr.getPeriodStart().getMonth() == parsedStart.getMonth() && pr.getPeriodStart().getYear() == parsedStart.getYear())) {
+                                selectedPayroll = pr;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (selectedPayroll == null) {
+                    if (parsedStart != null) {
+                        // user explicitly selected a period but no payroll exists for that employee in that period
+                        javax.swing.JOptionPane.showMessageDialog(this,
+                                "No payslip found for this employee in the selected period.",
+                                "No Payslip", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                        // leave tables cleared and exit
+                        displayDate.setText("[MM/DD/YY]");
+                        return;
+                    } else {
+                        // no period entered -> default to latest
+                        selectedPayroll = payrolls.get(0);
+                    }
+                }
+
+                Payroll p = selectedPayroll;
+
+                // set the header pay period text fields to the payroll's period start/end
+                if (p.getPeriodStart() != null) {
+                    firstDate.setText(p.getPeriodStart().format(dtf));
+                } else {
+                    firstDate.setText("[MM/DD/YY]");
+                }
+                if (p.getPeriodEnd() != null) {
+                    secondDate.setText(p.getPeriodEnd().format(dtf));
+                } else {
+                    secondDate.setText("[MM/DD/YY]");
+                }
 
                 // display period as issued date (end of period)
                 if (p.getPeriodEnd() != null) {
@@ -332,11 +416,73 @@ public class PayslipPopup extends javax.swing.JFrame {
                     displayDate.setText("[MM/DD/YY]");
                 }
 
-                // Fill mainForm table: rate, accrued (gross), gross, total deductions
+                // Fill mainForm table: rate, accrued (gross), and deductions breakdown
                 mf.setValueAt(String.format("%,.2f", emp.getRatePerDay()), 0, 1); // Rate per Month (show rate per day)
                 mf.setValueAt(String.format("%,.2f", p.getGrossPay()), 1, 1); // Amount Accrued
-                mf.setValueAt(String.format("%,.2f", p.getGrossPay()), 5, 1); // Gross Pay row
-                mf.setValueAt(String.format("%,.2f", p.getTotalDeductions()), 5, 3); // Total Deductions amount
+
+                double gross = p.getGrossPay();
+                // Tax is 3% of gross (as indicated by the column label)
+                double tax = Math.round(gross * 0.03 * 100.0) / 100.0; // round to cents
+                mf.setValueAt(String.format("%,.2f", tax), 0, 3);
+
+                // Fetch employee-specific deductions and map to rows
+                EmployeeDeductionDAO edao = new EmployeeDeductionDAO();
+                java.util.List<EmployeeDeduction> dedList = edao.getDeductionsByEmployee(emp.getEmpId());
+
+                // We'll try to map known deduction types to specific rows (pagibig, sss, loan, absences).
+                // Any other deductions returned by the DAO will be placed into the remaining deduction rows
+                // so the user can see the actual deduction name and amount.
+                Double pagibig = null, sss = null, loan = null, absences = null;
+                java.util.List<EmployeeDeduction> others = new java.util.ArrayList<>();
+
+                for (EmployeeDeduction ed : dedList) {
+                    String name = ed.getDeductionName() == null ? "" : ed.getDeductionName().toLowerCase();
+                    double amt = ed.getDeductionAmount();
+                    if (name.contains("pag") || name.contains("pag-") || name.contains("pagibig") || name.contains("pag ibig") || name.contains("hdmf")) {
+                        pagibig = amt;
+                    } else if (name.contains("sss")) {
+                        sss = amt;
+                    } else if (name.contains("loan")) {
+                        loan = amt;
+                    } else if (name.contains("absence") || name.contains("absences") || name.contains("absent")) {
+                        absences = amt;
+                    } else {
+                        // keep unknown/other deduction entries to display below
+                        others.add(ed);
+                    }
+                }
+
+                // Populate deduction column amounts for the known rows (0-tax,1-pagibig,2-sss,3-loan,4-absences,5-total)
+                if (pagibig != null) mf.setValueAt(String.format("%,.2f", pagibig), 1, 3);
+                if (sss != null) mf.setValueAt(String.format("%,.2f", sss), 2, 3);
+                if (loan != null) mf.setValueAt(String.format("%,.2f", loan), 3, 3);
+                if (absences != null) mf.setValueAt(String.format("%,.2f", absences), 4, 3);
+
+                // Fill remaining deduction rows with any 'other' deductions returned by DAO.
+                // We'll place them starting at row 1..4 in the Deductions columns (col index 2 for name, 3 for amount)
+                int[] targetRows = new int[] {1,2,3,4};
+                int ti = 0;
+                for (EmployeeDeduction ed : others) {
+                    // find next free row (one that doesn't already have a value in column 3)
+                    while (ti < targetRows.length) {
+                        int rr = targetRows[ti];
+                        Object existing = mf.getValueAt(rr, 3);
+                        if (existing == null || (existing instanceof String && ((String) existing).trim().isEmpty())) {
+                            // use this row
+                            mf.setValueAt(ed.getDeductionName(), rr, 2);
+                            mf.setValueAt(String.format("%,.2f", ed.getDeductionAmount()), rr, 3);
+                            ti++;
+                            break;
+                        }
+                        ti++;
+                    }
+                    if (ti >= targetRows.length) break; // no more space
+                }
+
+                // Gross row
+                mf.setValueAt(String.format("%,.2f", gross), 5, 1);
+                // Total Deductions (from payroll record)
+                mf.setValueAt(String.format("%,.2f", p.getTotalDeductions()), 5, 3);
 
                 // Net pay table
                 np.setValueAt(String.format("%,.2f", p.getNetPay()), 0, 1);
@@ -352,6 +498,49 @@ public class PayslipPopup extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "Invalid Employee ID.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_employeeIDActionPerformed
+
+    // Note: jTextField1 was removed; period is shown in header labels `firstDate`/`secondDate`.
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // Open the period selection dialog so user can pick a pay period for the payslip
+        PeriodSelectionPopUp dialog = new PeriodSelectionPopUp(this, true);
+        dialog.setLocationRelativeTo(this);
+        dialog.setVisible(true);
+
+        // After dialog closes, fetch chosen start/end and populate the payslip fields
+        String start = dialog.getSelectedPeriodStart();
+        String end = dialog.getSelectedPeriodEnd();
+    String pid = dialog.getSelectedPeriodId();
+        if (start != null && end != null) {
+            // Format ISO date (YYYY-MM-DD) to the display format used elsewhere (MM/dd/yyyy)
+            DateTimeFormatter displayFmt = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            try {
+                java.time.LocalDate s = java.time.LocalDate.parse(start);
+                firstDate.setText(s.format(displayFmt));
+            } catch (Exception ex) {
+                try { firstDate.setText(start); } catch (Exception ignore) {}
+            }
+            try {
+                java.time.LocalDate e = java.time.LocalDate.parse(end);
+                secondDate.setText(e.format(displayFmt));
+            } catch (Exception ex) {
+                try { secondDate.setText(end); } catch (Exception ignore) {}
+            }
+            // store chosen period id so subsequent employee lookups respect this period
+            try {
+                if (pid != null) {
+                    selectedPeriodId = Integer.parseInt(pid);
+                    periodChosen = true;
+                } else {
+                    selectedPeriodId = null;
+                    periodChosen = false;
+                }
+            } catch (NumberFormatException ex) {
+                selectedPeriodId = null;
+                periodChosen = false;
+            }
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -389,6 +578,7 @@ public class PayslipPopup extends javax.swing.JFrame {
     private javax.swing.JPanel employeeInfo;
     private javax.swing.JLabel firstDate;
     private javax.swing.JPanel headerPanel;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel logoPlacer;
     private javax.swing.JTable mainForm;
     private javax.swing.JScrollPane mainFormScrollPane;
